@@ -2,7 +2,7 @@
 
 namespace donatj\Printf;
 
-class StringScanner {
+class StringLexer {
 
 	private $pos = 0;
 
@@ -24,11 +24,29 @@ class StringScanner {
 		return new CharData($str, strlen($str) < $size);
 	}
 
+	public function pos() : int {
+		return $this->pos;
+	}
+
 	public function next() : CharData {
 		$data = $this->peek();
 
 		$this->pos += $data->length();
 
 		return $data;
+	}
+
+	public function rewind() : void {
+		$this->pos--;
+		if( $this->pos < 0 ) {
+			//@todo custom exception
+			throw new \RuntimeException('cannot rewind');
+		}
+	}
+
+	public function hasPrefix( string $prefix ) : bool {
+		$peek = $this->peek(strlen($prefix));
+
+		return $peek->getString() === $prefix;
 	}
 }
