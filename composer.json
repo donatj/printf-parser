@@ -1,0 +1,23 @@
+{
+	"name": "donatj/printf-parser",
+	"type": "library",
+	"require-dev": {
+		"donatj/drop": "*",
+		"phpunit/phpunit": "^7.5"
+	},
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jesse Donat",
+			"email": "donatj@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=7.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"donatj\\Printf\\": "src/"
+		}
+	}
+}
