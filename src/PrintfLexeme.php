@@ -36,6 +36,29 @@ class PrintfLexeme extends Lexeme {
 		'X' => self::T_INT_HEX_CAP,
 	];
 
+	public const ARG_TYPE_MISSING = '';
+	public const ARG_TYPE_INT     = 'int';
+	public const ARG_TYPE_DOUBLE  = 'float';
+	public const ARG_TYPE_STRING  = 'string';
+
+	/** @var int[] string    s */
+	public const STRING_TYPES = [ self::T_STRING ];
+
+	/** @var int[] integer    d, u, c, o, x, X, b */
+	public const INTEGER_TYPES = [
+		self::T_INT, self::T_INT_UNSIGNED,
+		self::T_INT_AS_CHARACTER, self::T_INT_AS_OCTAL,
+		self::T_INT_HEX, self::T_INT_HEX_CAP,
+		self::T_INT_AS_BINARY,
+	];
+
+	/** @var int[] double    g, G, e, E, f, F */
+	public const DOUBLE_TYPES = [
+		self::T_FLOAT_AUTO_SCI, self::T_FLOAT_AUTO_SCI_CAP,
+		self::T_DOUBLE_AS_SCI, self::T_DOUBLE_AS_SCI_CAP,
+		self::T_FLOAT_LOCALE, self::T_FLOAT_NO_LOCALE,
+	];
+
 	private $arg;
 	private $showPositive;
 	private $padChar;
@@ -77,6 +100,32 @@ class PrintfLexeme extends Lexeme {
 
 	public function getPrecision() : ?int {
 		return $this->precision;
+	}
+
+	/**
+	 * Returns based on the type of argument one of the following
+	 *
+	 *   PrintfLexeme::ARG_TYPE_MISSING
+	 *   PrintfLexeme::ARG_TYPE_INT
+	 *   PrintfLexeme::ARG_TYPE_DOUBLE
+	 *   PrintfLexeme::ARG_TYPE_STRING
+	 *
+	 * @return int
+	 */
+	public function argType() : string {
+		if( in_array($this->lexItemType, self::INTEGER_TYPES) ) {
+			return self::ARG_TYPE_INT;
+		}
+
+		if( in_array($this->lexItemType, self::DOUBLE_TYPES) ) {
+			return self::ARG_TYPE_DOUBLE;
+		}
+
+		if( in_array($this->lexItemType, self::STRING_TYPES) ) {
+			return self::ARG_TYPE_STRING;
+		}
+
+		return self::ARG_TYPE_MISSING;
 	}
 
 }

@@ -53,4 +53,40 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 		return new \ArrayIterator($this->lexItems);
 	}
 
+	/**
+	 * @return Lexeme[]
+	 */
+	public function toArray() : array {
+		return $this->lexItems;
+	}
+
+	/**
+	 * Returns the list of expected arguments a 1-indexed map of the following:
+	 *
+	 *   PrintfLexeme::ARG_TYPE_MISSING
+	 *   PrintfLexeme::ARG_TYPE_INT
+	 *   PrintfLexeme::ARG_TYPE_DOUBLE
+	 *   PrintfLexeme::ARG_TYPE_STRING
+	 *
+	 * @return string[]
+	 */
+	public function argTypes() : array {
+		$noNumInc = 1;
+		$args     = [];
+		foreach( $this->lexItems as $item ) {
+			if( $item instanceof PrintfLexeme ) {
+				$type = $item->argType();
+
+				if( $item->getArg() !== null ) {
+					$args[$item->getArg()] = $type;
+				} else {
+					$args[$noNumInc] = $type;
+					$noNumInc++;
+				}
+			}
+		}
+
+		return $args;
+	}
+
 }

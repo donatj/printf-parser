@@ -10,15 +10,15 @@ class Lexeme {
 	/**
 	 * @var int
 	 */
-	private $lexItemType;
+	protected $lexItemType;
 	/**
 	 * @var string
 	 */
-	private $val;
+	protected $val;
 	/**
 	 * @var int
 	 */
-	private $pos;
+	protected $pos;
 
 	/**
 	 * LexItem constructor.
