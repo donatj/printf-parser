@@ -2,7 +2,7 @@
 
 namespace donatj\Printf;
 
-class LexemeCollection {
+class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 
 	/**
 	 * @var LexItem[]
@@ -28,4 +28,29 @@ class LexemeCollection {
 
 		return null;
 	}
+
+	public function offsetSet( $offset, $value ) {
+		if( $offset === null ) {
+			$this->lexItems[] = $value;
+		} else {
+			$this->lexItems[$offset] = $value;
+		}
+	}
+
+	public function offsetExists( $offset ) {
+		return isset($this->lexItems[$offset]);
+	}
+
+	public function offsetUnset( $offset ) {
+		unset($this->lexItems[$offset]);
+	}
+
+	public function offsetGet( $offset ) {
+		return isset($this->lexItems[$offset]) ? $this->lexItems[$offset] : null;
+	}
+
+	public function getIterator() {
+		return new \ArrayIterator($this->lexItems);
+	}
+
 }
