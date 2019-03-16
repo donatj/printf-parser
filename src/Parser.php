@@ -20,7 +20,7 @@ class Parser {
 
 	public function parseStr( string $string ) : void {
 		$lexer = new StringLexer($string);
-		for( ; ; ) {
+		for( ;;) {
 			$next = $lexer->next();
 			if( $next->isEof() ) {
 				return;
@@ -32,6 +32,7 @@ class Parser {
 						new LexItem(LexItem::T_LITERAL_STRING, '%', $lexer->pos())
 					);
 					$lexer->next();
+
 					continue;
 				}
 
@@ -46,7 +47,7 @@ class Parser {
 	private function lexString( Emitter $emitter, StringLexer $lexer ) : void {
 		$pos    = $lexer->pos();
 		$buffer = '';
-		for( ; ; ) {
+		for( ;;) {
 			$next = $lexer->next();
 			if( $next->isEof() ) {
 				break;
@@ -87,7 +88,7 @@ class Parser {
 		}
 
 		switch( $next->getString() ) {
-			case '0';
+			case '0':
 				$padChar = '0';
 				$next    = $lexer->next();
 				break;
@@ -148,7 +149,7 @@ class Parser {
 
 	private function eatInt( StringLexer $lexer ) : string {
 		$int = '';
-		for( ; ; ) {
+		for( ;;) {
 			$next = $lexer->next();
 			if( !ctype_digit($next->getString()) ) {
 				$lexer->rewind();

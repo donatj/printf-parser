@@ -55,47 +55,28 @@ class PrintfLexItem extends LexItem {
 		$this->precision     = $precision;
 	}
 
-	/**
-	 * @return int|null
-	 */
 	public function getArg() : ?int {
 		return $this->arg;
 	}
 
-	/**
-	 * @return bool|null
-	 */
 	public function getShowPositive() : ?bool {
 		return $this->showPositive;
 	}
 
-	/**
-	 * @return string|null
-	 */
 	public function getPadChar() : ?string {
 		return $this->padChar;
 	}
 
-	/**
-	 * @return int|null
-	 */
 	public function getPadWidth() : ?int {
 		return $this->padWidth;
 	}
 
-	/**
-	 * @return bool|null
-	 */
 	public function getLeftJustified() : ?bool {
 		return $this->leftJustified;
 	}
 
-	/**
-	 * @return int|null
-	 */
 	public function getPrecision() : ?int {
 		return $this->precision;
 	}
-
 
 }

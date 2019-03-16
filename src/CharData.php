@@ -18,16 +18,10 @@ class CharData {
 		$this->eof    = $eof;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getString() : string {
 		return $this->string;
 	}
 
-	/**
-	 * @return bool
-	 */
 	public function isEof() : bool {
 		return $this->eof;
 	}
