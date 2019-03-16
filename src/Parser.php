@@ -38,6 +38,7 @@ class Parser {
 				}
 
 				$this->lexSprintf($this->emitter, $lexer);
+				continue;
 			}
 
 			$lexer->rewind();
