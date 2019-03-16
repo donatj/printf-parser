@@ -30,7 +30,7 @@ class Parser {
 			if( $next->getString() === '%' ) {
 				if( $lexer->hasPrefix('%') ) {
 					$this->emitter->emit(
-						new LexItem(LexItem::T_LITERAL_STRING, '%', $lexer->pos())
+						new Lexeme(Lexeme::T_LITERAL_STRING, '%', $lexer->pos())
 					);
 					$lexer->next();
 
@@ -63,7 +63,7 @@ class Parser {
 		}
 
 		$emitter->emit(
-			new LexItem(LexItem::T_LITERAL_STRING, $buffer, $pos)
+			new Lexeme(Lexeme::T_LITERAL_STRING, $buffer, $pos)
 		);
 	}
 
@@ -126,15 +126,15 @@ class Parser {
 			$next = $lexer->next();
 		}
 
-		$tType = LexItem::T_INVALID;
-		if( isset(PrintfLexItem::CHAR_MAP[$next->getString()]) ) {
-			$tType = PrintfLexItem::CHAR_MAP[$next->getString()];
+		$tType = Lexeme::T_INVALID;
+		if( isset(PrintfLexeme::CHAR_MAP[$next->getString()]) ) {
+			$tType = PrintfLexeme::CHAR_MAP[$next->getString()];
 		}
 
 		$content = $lexer->substr($pos, $lexer->pos() - $pos);
 
 		$emitter->emit(
-			new PrintfLexItem(
+			new PrintfLexeme(
 				$tType,
 				$content,
 				$pos,

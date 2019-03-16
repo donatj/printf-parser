@@ -4,13 +4,13 @@ namespace donatj\Printf;
 
 class LexemeEmitter {
 
-	/** @var LexItem[] */
+	/** @var Lexeme[] */
 	private $lexemes = [];
 
 	/**
 	 * @internal This is for use by the Parser
 	 */
-	public function emit( LexItem $lexItem ) {
+	public function emit( Lexeme $lexItem ) {
 		$this->lexemes[] = $lexItem;
 	}
 

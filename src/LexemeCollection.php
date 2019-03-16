@@ -5,23 +5,23 @@ namespace donatj\Printf;
 class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 
 	/**
-	 * @var LexItem[]
+	 * @var Lexeme[]
 	 */
 	private $lexItems;
 
 	/**
 	 * LexemeCollection constructor.
 	 */
-	public function __construct( LexItem ...$lexItems ) {
+	public function __construct( Lexeme ...$lexItems ) {
 		$this->lexItems = $lexItems;
 	}
 
 	/**
 	 * Retrieve the first invalid Lexeme or null if all are valid.
 	 */
-	public function getInvalid() : ?LexItem {
+	public function getInvalid() : ?Lexeme {
 		foreach( $this->lexItems as $lexItem ) {
-			if( $lexItem->getLexItemType() === LexItem::T_INVALID ) {
+			if( $lexItem->getLexItemType() === Lexeme::T_INVALID ) {
 				return $lexItem;
 			}
 		}

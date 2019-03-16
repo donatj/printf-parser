@@ -2,7 +2,7 @@
 
 namespace donatj\Printf;
 
-class PrintfLexItem extends LexItem {
+class PrintfLexeme extends Lexeme {
 
 	public const T_INT_AS_BINARY      = 101; // b - the argument is treated as an integer and presented as a binary number.
 	public const T_INT_AS_CHARACTER   = 102; // c - the argument is treated as an integer and presented as the character with that ASCII value.
