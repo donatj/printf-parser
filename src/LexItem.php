@@ -4,6 +4,7 @@ namespace donatj\Printf;
 
 class LexItem {
 
+	public const T_INVALID        = 0;
 	public const T_LITERAL_STRING = 1;
 	/**
 	 * @var int

@@ -31,6 +31,8 @@ class Parser {
 					$this->emitter->emit(
 						new LexItem(LexItem::T_LITERAL_STRING, '%', $lexer->pos())
 					);
+					$lexer->next();
+					continue;
 				}
 
 				$this->lexSprintf($this->emitter, $lexer);
@@ -64,6 +66,7 @@ class Parser {
 	}
 
 	private function lexSprintf( Emitter $emitter, StringLexer $lexer ) : void {
+		$pos  = $lexer->pos();
 		$next = $lexer->next();
 
 		$arg           = null;
@@ -71,29 +74,76 @@ class Parser {
 		$padChar       = null;
 		$padWidth      = null;
 		$leftJustified = null;
-		$width         = null;
+		$precision     = null;
 
 		if( $next->getString() !== '0' && ctype_digit($next->getString()) ) {
 			$lexer->rewind();
 			$int = $this->eatInt($lexer);
 			if( $lexer->hasPrefix('$') ) {
 				$lexer->next();
-				$arg = $int;
-				drop('arg', $arg);
+				$next = $lexer->next();
+				$arg  = $int;
 			}
 		}
 
 		switch( $next->getString() ) {
 			case '0';
 				$padChar = '0';
+				$next    = $lexer->next();
 				break;
 			case ' ':
 				$padChar = ' ';
+				$next    = $lexer->next();
 				break;
 			case "'":
 				$next    = $lexer->next();
 				$padChar = $next->getString();
+				$next    = $lexer->next();
 		}
+
+		if( $next->getString() === '-' ) {
+			$leftJustified = true;
+			$next          = $lexer->next();
+		}
+
+		if( $padChar !== null ) {
+			$lexer->rewind();
+			$peek = $lexer->peek();
+			if( ctype_digit($peek->getString()) ) {
+				$padWidth = $this->eatInt($lexer);
+			}
+
+			$next = $lexer->next();
+		}
+
+		if( $next->getString() === '.' ) {
+			if( ctype_digit($lexer->peek()->getString()) ) {
+				$precision = $this->eatInt($lexer);
+			}
+
+			$next = $lexer->next();
+		}
+
+		$tType = LexItem::T_INVALID;
+		if( isset(PrintfLexItem::CHAR_MAP[$next->getString()]) ) {
+			$tType = PrintfLexItem::CHAR_MAP[$next->getString()];
+		}
+
+		$content = $lexer->substr($pos, $lexer->pos() - $pos);
+
+		$emitter->emit(
+			new PrintfLexItem(
+				$tType,
+				$content,
+				$pos,
+				$arg,
+				$showPositive,
+				$padChar,
+				$padWidth,
+				$leftJustified,
+				$precision
+			)
+		);
 	}
 
 	private function eatInt( StringLexer $lexer ) : string {
