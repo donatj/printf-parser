@@ -14,11 +14,8 @@ class LexemeEmitter {
 		$this->lexemes[] = $lexItem;
 	}
 
-	/**
-	 * @return LexItem[]
-	 */
-	public function getLexemes() : array {
-		return $this->lexemes;
+	public function getLexemes() : LexemeCollection {
+		return new LexemeCollection(...$this->lexemes);
 	}
 
 }
