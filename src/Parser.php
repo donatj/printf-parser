@@ -5,22 +5,23 @@ namespace donatj\Printf;
 class Parser {
 
 	/**
-	 * @var \donatj\Printf\Emitter
+	 * @var \donatj\Printf\LexemeEmitter
 	 */
 	private $emitter;
 
 	/**
 	 * Parser constructor.
 	 *
-	 * @param \donatj\Printf\Emitter $emitter
+	 * @param \donatj\Printf\LexemeEmitter $emitter
 	 */
-	public function __construct( Emitter $emitter ) {
+	public function __construct( LexemeEmitter $emitter ) {
 		$this->emitter = $emitter;
 	}
 
 	public function parseStr( string $string ) : void {
 		$lexer = new StringLexer($string);
-		for( ;;) {
+
+		for(;;) {
 			$next = $lexer->next();
 			if( $next->isEof() ) {
 				return;
@@ -44,7 +45,7 @@ class Parser {
 		}
 	}
 
-	private function lexString( Emitter $emitter, StringLexer $lexer ) : void {
+	private function lexString( LexemeEmitter $emitter, StringLexer $lexer ) : void {
 		$pos    = $lexer->pos();
 		$buffer = '';
 		for( ;;) {
@@ -66,7 +67,7 @@ class Parser {
 		);
 	}
 
-	private function lexSprintf( Emitter $emitter, StringLexer $lexer ) : void {
+	private function lexSprintf( LexemeEmitter $emitter, StringLexer $lexer ) : void {
 		$pos  = $lexer->pos();
 		$next = $lexer->next();
 
