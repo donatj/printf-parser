@@ -5,7 +5,7 @@ namespace Integration;
 use donatj\Printf\Emitter;
 use donatj\Printf\Lexeme;
 use donatj\Printf\Parser;
-use donatj\Printf\PrintfLexeme;
+use donatj\Printf\ArgumentLexeme;
 
 class ParserTest extends \PHPUnit\Framework\TestCase {
 
@@ -18,7 +18,7 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 			public $serialized = '';
 
 			public function emit( Lexeme $lexItem ) {
-				if( $lexItem instanceof PrintfLexeme ) {
+				if( $lexItem instanceof ArgumentLexeme ) {
 					$this->serialized .= "[{$lexItem->getLexItemType()}={$lexItem->getVal()}:{$lexItem->getPos()}||{$lexItem->getArg()}|{$lexItem->getShowPositive()}|{$lexItem->getPadChar()}|{$lexItem->getPadWidth()}|{$lexItem->getLeftJustified()}|{$lexItem->getPrecision()}]";
 				} else {
 					$this->serialized .= "[{$lexItem->getLexItemType()}={$lexItem->getVal()}:{$lexItem->getPos()}]";

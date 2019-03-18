@@ -119,14 +119,14 @@ class Parser {
 		}
 
 		$tType = Lexeme::T_INVALID;
-		if( isset(PrintfLexeme::CHAR_MAP[$next->getString()]) ) {
-			$tType = PrintfLexeme::CHAR_MAP[$next->getString()];
+		if( isset(ArgumentLexeme::CHAR_MAP[$next->getString()]) ) {
+			$tType = ArgumentLexeme::CHAR_MAP[$next->getString()];
 		}
 
 		$content = $lexer->substr($pos, $lexer->pos() - $pos);
 
 		$emitter->emit(
-			new PrintfLexeme(
+			new ArgumentLexeme(
 				$tType,
 				$content,
 				$pos,

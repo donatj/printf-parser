@@ -74,7 +74,7 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 		$noNumInc = 1;
 		$args     = [];
 		foreach( $this->lexItems as $item ) {
-			if( $item instanceof PrintfLexeme ) {
+			if( $item instanceof ArgumentLexeme ) {
 				$type = $item->argType();
 
 				if( $item->getArg() !== null ) {
