@@ -5,6 +5,12 @@
 [![Build Status](https://travis-ci.org/donatj/printf-parser.svg?branch=master)](https://travis-ci.org/donatj/printf-parser)
 
 
+
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/donatj/printf-parser/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/donatj/printf-parser)
+[![Code Coverage](https://scrutinizer-ci.com/g/donatj/printf-parser/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/donatj/printf-parser)
+
+
 Parses printf style strings, e.g. `cats: %d` into inspectable lexemes.
 
 
