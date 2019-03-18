@@ -21,12 +21,7 @@ class Parser {
 	public function parseStr( string $string ) : void {
 		$lexer = new StringLexer($string);
 
-		for(;;) {
-			$next = $lexer->next();
-			if( $next->isEof() ) {
-				return;
-			}
-
+		while( ($next = $lexer->next()) && !$next->isEof() ) {
 			if( $next->getString() === '%' ) {
 				if( $lexer->hasPrefix('%') ) {
 					$this->emitter->emit(
@@ -50,12 +45,7 @@ class Parser {
 	private function lexString( Emitter $emitter, StringLexer $lexer ) : void {
 		$pos    = $lexer->pos();
 		$buffer = '';
-		for( ;;) {
-			$next = $lexer->next();
-			if( $next->isEof() ) {
-				break;
-			}
-
+		while( ($next = $lexer->next()) && !$next->isEof() ) {
 			if( $next->getString() === '%' ) {
 				$lexer->rewind();
 				break;
