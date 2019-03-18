@@ -47,6 +47,12 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 				'[!=this :0][!=%:6][!= is my :7][s=s:15|||||||][!= to :16][d=1$\'x10d:21||1||x|10||][!= parse :28][s=2$s:36||2|||||][!= longer string :39][s=15$s:55||15|||||]',
 			],
 
+			// test positional arguments
+			[
+				'%g %2$s-%1$f %u',
+				'[g=g:1|||||||][!= :2][s=2$s:4||2|||||][!=-:7][f=1$f:9||1|||||][!= :12][u=u:14|||||||]',
+			],
+
 			// invalid string handling
 			[ '100%', '[!=100:0][=:4|||||||]' ],
 		];
