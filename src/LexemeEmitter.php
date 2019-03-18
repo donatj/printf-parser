@@ -2,7 +2,7 @@
 
 namespace donatj\Printf;
 
-class LexemeEmitter {
+class LexemeEmitter implements Emitter {
 
 	/** @var Lexeme[] */
 	private $lexemes = [];
