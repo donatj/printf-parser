@@ -119,8 +119,8 @@ class Parser {
 		}
 
 		$tType = Lexeme::T_INVALID;
-		if( isset(ArgumentLexeme::CHAR_MAP[$next->getString()]) ) {
-			$tType = ArgumentLexeme::CHAR_MAP[$next->getString()];
+		if( in_array($next->getString(), ArgumentLexeme::VALID_T_TYPES, true) ) {
+			$tType = $next->getString();
 		}
 
 		$content = $lexer->substr($pos, $lexer->pos() - $pos);

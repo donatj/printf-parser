@@ -19,21 +19,21 @@ class ArgumentLexeme extends Lexeme {
 	public const T_INT_HEX            = 'x'; // x - the argument is treated as an integer and presented as a hexadecimal number (with lowercase letters).
 	public const T_INT_HEX_CAP        = 'X'; // X - the argument is treated as an integer and presented as a hexadecimal number (with uppercase letters).
 
-	public const CHAR_MAP = [
-		'b' => self::T_INT_AS_BINARY,
-		'c' => self::T_INT_AS_CHARACTER,
-		'd' => self::T_INT,
-		'e' => self::T_DOUBLE_AS_SCI,
-		'E' => self::T_DOUBLE_AS_SCI_CAP,
-		'f' => self::T_FLOAT_LOCALE,
-		'F' => self::T_FLOAT_NO_LOCALE,
-		'g' => self::T_FLOAT_AUTO_SCI,
-		'G' => self::T_FLOAT_AUTO_SCI_CAP,
-		'o' => self::T_INT_AS_OCTAL,
-		's' => self::T_STRING,
-		'u' => self::T_INT_UNSIGNED,
-		'x' => self::T_INT_HEX,
-		'X' => self::T_INT_HEX_CAP,
+	public const VALID_T_TYPES = [
+		self::T_INT_AS_BINARY,
+		self::T_INT_AS_CHARACTER,
+		self::T_INT,
+		self::T_DOUBLE_AS_SCI,
+		self::T_DOUBLE_AS_SCI_CAP,
+		self::T_FLOAT_LOCALE,
+		self::T_FLOAT_NO_LOCALE,
+		self::T_FLOAT_AUTO_SCI,
+		self::T_FLOAT_AUTO_SCI_CAP,
+		self::T_INT_AS_OCTAL,
+		self::T_STRING,
+		self::T_INT_UNSIGNED,
+		self::T_INT_HEX,
+		self::T_INT_HEX_CAP,
 	];
 
 	public const ARG_TYPE_MISSING = '';
