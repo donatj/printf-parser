@@ -4,11 +4,11 @@ namespace donatj\Printf;
 
 class Lexeme {
 
-	public const T_INVALID        = 0;
-	public const T_LITERAL_STRING = 1;
+	public const T_INVALID        = '';
+	public const T_LITERAL_STRING = '!';
 
 	/**
-	 * @var int
+	 * @var string
 	 */
 	protected $lexItemType;
 	/**
@@ -23,13 +23,13 @@ class Lexeme {
 	/**
 	 * LexItem constructor.
 	 */
-	public function __construct( int $lexItemType, string $val, int $pos ) {
+	public function __construct( string $lexItemType, string $val, int $pos ) {
 		$this->lexItemType = $lexItemType;
 		$this->val         = $val;
 		$this->pos         = $pos;
 	}
 
-	public function getLexItemType() : int {
+	public function getLexItemType() : string {
 		return $this->lexItemType;
 	}
 
