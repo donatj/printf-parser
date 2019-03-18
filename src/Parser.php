@@ -5,14 +5,14 @@ namespace donatj\Printf;
 class Parser {
 
 	/**
-	 * @var \donatj\Printf\Emitter
+	 * @var Emitter
 	 */
 	private $emitter;
 
 	/**
 	 * Parser constructor.
 	 *
-	 * @param \donatj\Printf\Emitter $emitter
+	 * @param Emitter $emitter
 	 */
 	public function __construct( Emitter $emitter ) {
 		$this->emitter = $emitter;
@@ -142,8 +142,7 @@ class Parser {
 
 	private function eatInt( StringLexer $lexer ) : string {
 		$int = '';
-		for( ;;) {
-			$next = $lexer->next();
+		while( ($next = $lexer->next()) && !$next->isEof() ) {
 			if( !ctype_digit($next->getString()) ) {
 				$lexer->rewind();
 				break;
