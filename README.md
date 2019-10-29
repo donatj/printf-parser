@@ -61,3 +61,88 @@ s -> 's' arg type: string
 d -> 'd' arg type: int
 ! -> '%'
 ```
+
+## Documentation
+
+### Class: \donatj\Printf\Parser
+
+#### Method: Parser->__construct
+
+```php
+function __construct(\donatj\Printf\Emitter $emitter)
+```
+
+Parser constructor.
+
+##### Parameters:
+
+- ***\donatj\Printf\Emitter*** `$emitter` - The given Emitter will be parsed Lexemes as parsed
+
+---
+
+#### Method: Parser->parseStr
+
+```php
+function parseStr(string $string) : void
+```
+
+Parses a printf string and pass parsed lexemes to the configured Emitter
+
+### Class: \donatj\Printf\LexemeEmitter
+
+#### Method: LexemeEmitter->getLexemes
+
+```php
+function getLexemes() : \donatj\Printf\donatj\Printf\LexemeCollection
+```
+
+Return the Lexemes received by the emitter as an immutable LexemeCollection
+
+### Class: \donatj\Printf\LexemeCollection
+
+LexemeCollection is an immutable iterable collection of Lexemes with ArrayAccess
+
+#### Method: LexemeCollection->getInvalid
+
+```php
+function getInvalid() : ?\donatj\Printf\donatj\Printf\Lexeme
+```
+
+Retrieve the first invalid Lexeme or null if all are valid.  
+  
+This is useful for checking if a printf string parsed without error.
+
+---
+
+#### Method: LexemeCollection->toArray
+
+```php
+function toArray() : array
+```
+
+Get the LexemeCollection as an Array
+
+##### Returns:
+
+- ***\donatj\Printf\Lexeme[]***
+
+---
+
+#### Method: LexemeCollection->argTypes
+
+```php
+function argTypes() : array
+```
+
+##### Returns the list of expected arguments a 1-indexed map of the following
+
+```  
+PrintfLexeme::ARG_TYPE_MISSING  
+PrintfLexeme::ARG_TYPE_INT  
+PrintfLexeme::ARG_TYPE_DOUBLE  
+PrintfLexeme::ARG_TYPE_STRING  
+```
+
+##### Returns:
+
+- ***string[]***

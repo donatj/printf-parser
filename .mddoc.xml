@@ -22,6 +22,11 @@ Parses printf style strings, e.g. `cats: %d` into inspectable lexemes.
 				<text>Output:</text>
 				<exec format="code-block" cmd="php ./example/example.php"/>
 			</section>
+			<section title="Documentation">
+				<file name="src/Parser.php"/>
+				<file name="src/LexemeEmitter.php"/>
+				<file name="src/LexemeCollection.php"/>
+			</section>
 		</section>
 	</docpage>
 </mddoc>
