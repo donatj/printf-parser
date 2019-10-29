@@ -1,12 +1,9 @@
 # Printf Parser
 
 [![Latest Stable Version](https://poser.pugx.org/donatj/printf-parser/version)](https://packagist.org/packages/donatj/printf-parser)
+[![Total Downloads](https://poser.pugx.org/donatj/printf-parser/downloads)](https://packagist.org/packages/donatj/printf-parser)
 [![License](https://poser.pugx.org/donatj/printf-parser/license)](https://packagist.org/packages/donatj/printf-parser)
 [![Build Status](https://travis-ci.org/donatj/printf-parser.svg?branch=master)](https://travis-ci.org/donatj/printf-parser)
-
-
-
-
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/donatj/printf-parser/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/donatj/printf-parser)
 [![Code Coverage](https://scrutinizer-ci.com/g/donatj/printf-parser/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/donatj/printf-parser)
 

@@ -1,0 +1,27 @@
+<mddoc>
+	<docpage target="README.md" autoloader="psr4" autoloader-root="src" autoloader-root-namespace="donatj\Printf">
+		<section title="Printf Parser">
+			<badge-poser type="version"/>
+			<badge-poser type="downloads"/>
+			<badge-poser type="license"/>
+			<badge-travis name="donatj/printf-parser"/>
+			<badge-scrutinizer name="donatj/printf-parser" type="quality"/>
+			<badge-scrutinizer name="donatj/printf-parser" type="coverage"/>
+			<text><![CDATA[
+Parses printf style strings, e.g. `cats: %d` into inspectable lexemes.
+]]></text>
+			<section title="Requirements">
+				<composer-requires/>
+			</section>
+			<section title="Installing">
+				<composer-install/>
+			</section>
+			<section title="Example">
+				<text>Here is a simple example:</text>
+				<source name="example/example.php" lang="php"/>
+				<text>Output:</text>
+				<exec format="code-block" cmd="php ./example/example.php"/>
+			</section>
+		</section>
+	</docpage>
+</mddoc>
