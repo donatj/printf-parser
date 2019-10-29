@@ -12,12 +12,15 @@ class Parser {
 	/**
 	 * Parser constructor.
 	 *
-	 * @param Emitter $emitter
+	 * @param \donatj\Printf\Emitter $emitter The given Emitter will be parsed Lexemes as parsed
 	 */
 	public function __construct( Emitter $emitter ) {
 		$this->emitter = $emitter;
 	}
 
+	/**
+	 * Parses a printf string and pass parsed lexemes to the configured Emitter
+	 */
 	public function parseStr( string $string ) : void {
 		$lexer = new StringLexer($string);
 

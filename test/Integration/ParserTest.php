@@ -17,7 +17,7 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 
 			public $serialized = '';
 
-			public function emit( Lexeme $lexItem ) {
+			public function emit( Lexeme $lexItem ) : void {
 				if( $lexItem instanceof ArgumentLexeme ) {
 					$this->serialized .= "[{$lexItem->getLexItemType()}={$lexItem->getVal()}:{$lexItem->getPos()}||{$lexItem->getArg()}|{$lexItem->getShowPositive()}|{$lexItem->getPadChar()}|{$lexItem->getPadWidth()}|{$lexItem->getLeftJustified()}|{$lexItem->getPrecision()}]";
 				} else {

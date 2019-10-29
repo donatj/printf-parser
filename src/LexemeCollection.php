@@ -2,6 +2,9 @@
 
 namespace donatj\Printf;
 
+/**
+ * LexemeCollection is an immutable iterable collection of Lexemes with ArrayAccess
+ */
 class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 
 	/**
@@ -11,6 +14,8 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 
 	/**
 	 * LexemeCollection constructor.
+	 *
+	 * @internal
 	 */
 	public function __construct( Lexeme ...$lexItems ) {
 		$this->lexItems = $lexItems;
@@ -18,6 +23,8 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 
 	/**
 	 * Retrieve the first invalid Lexeme or null if all are valid.
+	 *
+	 * This is useful for checking if a printf string parsed without error.
 	 */
 	public function getInvalid() : ?Lexeme {
 		foreach( $this->lexItems as $lexItem ) {
@@ -29,6 +36,9 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 		return null;
 	}
 
+	/**
+	 * @internal
+	 */
 	public function offsetSet( $offset, $value ) {
 		if( $offset === null ) {
 			$this->lexItems[] = $value;
@@ -37,23 +47,37 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 		}
 	}
 
+	/**
+	 * @internal
+	 */
 	public function offsetExists( $offset ) {
 		return isset($this->lexItems[$offset]);
 	}
 
+	/**
+	 * @internal
+	 */
 	public function offsetUnset( $offset ) {
 		unset($this->lexItems[$offset]);
 	}
 
+	/**
+	 * @internal
+	 */
 	public function offsetGet( $offset ) {
 		return isset($this->lexItems[$offset]) ? $this->lexItems[$offset] : null;
 	}
 
+	/**
+	 * @internal
+	 */
 	public function getIterator() {
 		return new \ArrayIterator($this->lexItems);
 	}
 
 	/**
+	 * Get the LexemeCollection as an Array
+	 *
 	 * @return Lexeme[]
 	 */
 	public function toArray() : array {
@@ -63,10 +87,12 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	/**
 	 * Returns the list of expected arguments a 1-indexed map of the following:
 	 *
-	 *   PrintfLexeme::ARG_TYPE_MISSING
-	 *   PrintfLexeme::ARG_TYPE_INT
-	 *   PrintfLexeme::ARG_TYPE_DOUBLE
-	 *   PrintfLexeme::ARG_TYPE_STRING
+	 * ```
+	 * PrintfLexeme::ARG_TYPE_MISSING
+	 * PrintfLexeme::ARG_TYPE_INT
+	 * PrintfLexeme::ARG_TYPE_DOUBLE
+	 * PrintfLexeme::ARG_TYPE_STRING
+	 * ```
 	 *
 	 * @return string[]
 	 */
