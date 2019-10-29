@@ -2,6 +2,11 @@
 
 namespace donatj\Printf;
 
+/**
+ * Parser implements a PHP Printf compatible Printf string parser.
+ *
+ * @see https://www.php.net/manual/en/function.printf.php
+ */
 class Parser {
 
 	/**
@@ -12,14 +17,14 @@ class Parser {
 	/**
 	 * Parser constructor.
 	 *
-	 * @param \donatj\Printf\Emitter $emitter The given Emitter will be parsed Lexemes as parsed
+	 * @param \donatj\Printf\Emitter $emitter The given Emitter to emit Lexemes as parsed
 	 */
 	public function __construct( Emitter $emitter ) {
 		$this->emitter = $emitter;
 	}
 
 	/**
-	 * Parses a printf string and pass parsed lexemes to the configured Emitter
+	 * Parses a printf string and emit parsed lexemes to the configured Emitter
 	 */
 	public function parseStr( string $string ) : void {
 		$lexer = new StringLexer($string);

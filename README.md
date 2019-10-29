@@ -66,6 +66,8 @@ d -> 'd' arg type: int
 
 ### Class: \donatj\Printf\Parser
 
+Parser implements a PHP Printf compatible Printf string parser.
+
 #### Method: Parser->__construct
 
 ```php
@@ -76,7 +78,7 @@ Parser constructor.
 
 ##### Parameters:
 
-- ***\donatj\Printf\Emitter*** `$emitter` - The given Emitter will be parsed Lexemes as parsed
+- ***\donatj\Printf\Emitter*** `$emitter` - The given Emitter to emit Lexemes as parsed
 
 ---
 
@@ -86,7 +88,7 @@ Parser constructor.
 function parseStr(string $string) : void
 ```
 
-Parses a printf string and pass parsed lexemes to the configured Emitter
+Parses a printf string and emit parsed lexemes to the configured Emitter
 
 ### Class: \donatj\Printf\LexemeEmitter
 
