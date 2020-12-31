@@ -92,10 +92,12 @@ Parses a printf string and emit parsed lexemes to the configured Emitter
 
 ### Class: \donatj\Printf\LexemeEmitter
 
+---
+
 #### Method: LexemeEmitter->getLexemes
 
 ```php
-function getLexemes() : \donatj\Printf\donatj\Printf\LexemeCollection
+function getLexemes() : \donatj\Printf\LexemeCollection
 ```
 
 Return the Lexemes received by the emitter as an immutable LexemeCollection
@@ -104,10 +106,12 @@ Return the Lexemes received by the emitter as an immutable LexemeCollection
 
 LexemeCollection is an immutable iterable collection of Lexemes with ArrayAccess
 
+---
+
 #### Method: LexemeCollection->getInvalid
 
 ```php
-function getInvalid() : ?\donatj\Printf\donatj\Printf\Lexeme
+function getInvalid() : ?\donatj\Printf\Lexeme
 ```
 
 Retrieve the first invalid Lexeme or null if all are valid.  
