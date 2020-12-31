@@ -4,20 +4,65 @@ namespace donatj\Printf;
 
 class ArgumentLexeme extends Lexeme {
 
-	public const T_INT_AS_BINARY      = 'b'; // b - the argument is treated as an integer and presented as a binary number.
-	public const T_INT_AS_CHARACTER   = 'c'; // c - the argument is treated as an integer and presented as the character with that ASCII value.
-	public const T_INT                = 'd'; // d - the argument is treated as an integer and presented as a (signed) decimal number.
-	public const T_DOUBLE_AS_SCI      = 'e'; // e - the argument is treated as scientific notation (e.g. 1.2e+2). The precision specifier stands for the number of digits after the decimal point since PHP 5.2.1. In earlier versions, it was taken as number of significant digits (one less).
-	public const T_DOUBLE_AS_SCI_CAP  = 'E'; // E - like %e but uses uppercase letter (e.g. 1.2E+2).
-	public const T_FLOAT_LOCALE       = 'f'; // f - the argument is treated as a float and presented as a floating-point number (locale aware).
-	public const T_FLOAT_NO_LOCALE    = 'F'; // F - the argument is treated as a float and presented as a floating-point number (non-locale aware). Available since PHP 5.0.3.
-	public const T_FLOAT_AUTO_SCI     = 'g'; // g - shorter of %e and %f.
-	public const T_FLOAT_AUTO_SCI_CAP = 'G'; // G - shorter of %E and %F.
-	public const T_INT_AS_OCTAL       = 'o'; // o - the argument is treated as an integer and presented as an octal number.
-	public const T_STRING             = 's'; // s - the argument is treated as and presented as a string.
-	public const T_INT_UNSIGNED       = 'u'; // u - the argument is treated as an integer and presented as an unsigned decimal number.
-	public const T_INT_HEX            = 'x'; // x - the argument is treated as an integer and presented as a hexadecimal number (with lowercase letters).
-	public const T_INT_HEX_CAP        = 'X'; // X - the argument is treated as an integer and presented as a hexadecimal number (with uppercase letters).
+	/**
+	 * @var string the argument is treated as an integer and presented as a binary number.
+	 */
+	public const T_INT_AS_BINARY = 'b';
+	/**
+	 * @var string the argument is treated as an integer and presented as the character with that ASCII value.
+	 */
+	public const T_INT_AS_CHARACTER = 'c';
+	/**
+	 * @var string the argument is treated as an integer and presented as a (signed) decimal number.
+	 */
+	public const T_INT = 'd';
+	/**
+	 * @var string the argument is treated as scientific notation (e.g. 1.2e+2). The precision specifier stands for the
+	 *     number of digits after the decimal point since PHP 5.2.1. In earlier versions, it was taken as number of
+	 *     significant digits (one less).
+	 */
+	public const T_DOUBLE_AS_SCI = 'e';
+	/**
+	 * @var string like %e but uses uppercase letter (e.g. 1.2E+2).
+	 */
+	public const T_DOUBLE_AS_SCI_CAP = 'E';
+	/**
+	 * @var string the argument is treated as a float and presented as a floating-point number (locale aware).
+	 */
+	public const T_FLOAT_LOCALE = 'f';
+	/**
+	 * @var string the argument is treated as a float and presented as a floating-point number (non-locale aware).
+	 *     Available since PHP 5.0.3.
+	 */
+	public const T_FLOAT_NO_LOCALE = 'F';
+	/**
+	 * @var string shorter of %e and %f.
+	 */
+	public const T_FLOAT_AUTO_SCI = 'g';
+	/**
+	 * @var string shorter of %E and %F.
+	 */
+	public const T_FLOAT_AUTO_SCI_CAP = 'G';
+	/**
+	 * @var string the argument is treated as an integer and presented as an octal number.
+	 */
+	public const T_INT_AS_OCTAL = 'o';
+	/**
+	 * @var string the argument is treated as and presented as a string.
+	 */
+	public const T_STRING = 's';
+	/**
+	 * @var string the argument is treated as an integer and presented as an unsigned decimal number.
+	 */
+	public const T_INT_UNSIGNED = 'u';
+	/**
+	 * @var string the argument is treated as an integer and presented as a hexadecimal number (with lowercase letters).
+	 */
+	public const T_INT_HEX = 'x';
+	/**
+	 * @var string the argument is treated as an integer and presented as a hexadecimal number (with uppercase letters).
+	 */
+	public const T_INT_HEX_CAP = 'X';
 
 	public const VALID_T_TYPES = [
 		self::T_INT_AS_BINARY,
@@ -66,11 +111,15 @@ class ArgumentLexeme extends Lexeme {
 	private $leftJustified;
 	private $precision;
 
+	/**
+	 * ArgumentLexeme constructor.
+	 */
 	public function __construct(
 		string $lexItemType, string $val, int $pos,
 		?int $arg, ?bool $showPositive, ?string $padChar, ?int $padWidth, ?bool $leftJustified, ?int $precision
 	) {
 		parent::__construct($lexItemType, $val, $pos);
+
 		$this->arg           = $arg;
 		$this->showPositive  = $showPositive;
 		$this->padChar       = $padChar;
@@ -87,18 +136,38 @@ class ArgumentLexeme extends Lexeme {
 		return $this->showPositive;
 	}
 
+	/**
+	 * Specified pad character
+	 *
+	 * @return string|null null on unspecified
+	 */
 	public function getPadChar() : ?string {
 		return $this->padChar;
 	}
 
+	/**
+	 * Specified pad width
+	 *
+	 * @return int|null null on unspecified
+	 */
 	public function getPadWidth() : ?int {
 		return $this->padWidth;
 	}
 
+	/**
+	 * Is Lexeme left justified?
+	 *
+	 * @return bool|null null on unspecified
+	 */
 	public function getLeftJustified() : ?bool {
 		return $this->leftJustified;
 	}
 
+	/**
+	 * The Lexeme's indicated precision.
+	 *
+	 * @return int|null null on unspecified
+	 */
 	public function getPrecision() : ?int {
 		return $this->precision;
 	}

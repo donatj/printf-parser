@@ -76,7 +76,7 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	}
 
 	/**
-	 * Get the LexemeCollection as an Array
+	 * Get the LexemeCollection as an ordered array of Lexemes
 	 *
 	 * @return Lexeme[]
 	 */

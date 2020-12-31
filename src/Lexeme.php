@@ -2,6 +2,9 @@
 
 namespace donatj\Printf;
 
+/**
+ * Lexeme represents a "basic" component of a printf string - either Literal Strings "!" or Invalid Lexemes
+ */
 class Lexeme {
 
 	public const T_INVALID        = '';
@@ -29,6 +32,9 @@ class Lexeme {
 		$this->pos         = $pos;
 	}
 
+	/**
+	 * The type of the printf Lexeme
+	 */
 	public function getLexItemType() : string {
 		return $this->lexItemType;
 	}
@@ -37,6 +43,7 @@ class Lexeme {
 		return $this->val;
 	}
 
+	/** The string position of the given lexeme */
 	public function getPos() : int {
 		return $this->pos;
 	}
