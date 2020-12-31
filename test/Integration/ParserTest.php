@@ -2,10 +2,10 @@
 
 namespace Integration;
 
+use donatj\Printf\ArgumentLexeme;
 use donatj\Printf\Emitter;
 use donatj\Printf\Lexeme;
 use donatj\Printf\Parser;
-use donatj\Printf\ArgumentLexeme;
 
 class ParserTest extends \PHPUnit\Framework\TestCase {
 

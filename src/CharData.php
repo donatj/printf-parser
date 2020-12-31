@@ -29,4 +29,5 @@ class CharData {
 	public function length() : int {
 		return strlen($this->string);
 	}
+
 }

@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$emitter = new \donatj\Printf\LexemeEmitter();
+$emitter = new \donatj\Printf\LexemeEmitter;
 $parser  = new \donatj\Printf\Parser($emitter);
 
 $parser->parseStr('percent of %s: %d%%');

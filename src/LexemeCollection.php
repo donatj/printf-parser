@@ -65,7 +65,7 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	 * @internal
 	 */
 	public function offsetGet( $offset ) {
-		return isset($this->lexItems[$offset]) ? $this->lexItems[$offset] : null;
+		return $this->lexItems[$offset] ?? null;
 	}
 
 	/**

@@ -53,4 +53,5 @@ class StringLexer {
 	public function substr( $start, $length ) : string {
 		return substr($this->string, $start, $length);
 	}
+
 }
