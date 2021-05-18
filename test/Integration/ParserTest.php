@@ -58,6 +58,10 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 
 
 			'invalid string handling' => [ '100%', '[!=100:0][=:4|||pos:-1|||left:-1|]' ],
+
+			'test positive argument' => ['%+10d %-+2d %+-2d', '[=+1:1|||pos:1|||left:-1|][!=0d :3][=-+2:7|||pos:1|||left:1|][!=d :10][=+-2:13|||pos:1|||left:1|][!=d:16]'],
+
+			'handle dumb flag parsing' => [ "%---+++---+-'x10d", '[d=---+++---+-\'x10d:1|||pos:1|x|10|left:1|]' ],
 		];
 	}
 
