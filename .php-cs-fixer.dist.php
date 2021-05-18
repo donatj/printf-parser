@@ -3,10 +3,12 @@
 $finder = PhpCsFixer\Finder::create()
 	->files()
 	->in(__DIR__ . '/src')
+	->in(__DIR__ . '/test')
+	->in(__DIR__ . '/example')
 	->name('*.php');
 
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config)
 	->setUsingCache(true)
 	->setIndent("\t")
 	->setLineEnding("\n")
@@ -15,7 +17,11 @@ return PhpCsFixer\Config::create()
 	->setRules(
 		[
 			'@PHPUnit60Migration:risky' => true,
-			'concat_space' => [
+			'php_unit_test_case_static_method_calls' => [
+				'call_type' => 'this',
+			],
+
+			'concat_space'              => [
 				'spacing' => 'one',
 			],
 
@@ -47,11 +53,22 @@ return PhpCsFixer\Config::create()
 
 			'phpdoc_trim'                                   => true,
 			'phpdoc_trim_consecutive_blank_line_separation' => true,
-			
+
 			'phpdoc_types'       => true,
 			'phpdoc_types_order' => [
 				'null_adjustment' => 'always_last',
 				'sort_algorithm'  => 'alpha',
+			],
+
+			'phpdoc_align' => [
+				'align' => 'vertical',
+				'tags'  => [ 'param' ],
+			],
+
+			'phpdoc_line_span' => [
+				'const'    => 'single',
+				'method'   => 'multi',
+				'property' => 'single',
 			],
 
 			'short_scalar_cast' => true,
@@ -85,17 +102,27 @@ return PhpCsFixer\Config::create()
 			],
 
 			'blank_line_before_statement' => [
-				'statements' => [ 'continue', 'try', 'switch', 'die', 'exit', 'throw', 'return' ],
+				'statements' => [ 'continue', 'try', 'switch', 'exit', 'throw', 'return', 'do' ],
 			],
 
-			'no_superfluous_phpdoc_tags' => true,
+			'no_superfluous_phpdoc_tags' => [
+				'remove_inheritdoc' => true,
+			],
 			'no_superfluous_elseif'      => true,
 
 			'no_useless_else' => true,
 
+			'compact_nullable_typehint' => true,
+
 			'combine_consecutive_issets'  => true,
 			'escape_implicit_backslashes' => true,
+			'explicit_indirect_variable'  => true,
 			'heredoc_to_nowdoc'           => true,
+
+
+			'no_singleline_whitespace_before_semicolons' => true,
+			'no_null_property_initialization'            => true,
+			'no_whitespace_before_comma_in_array'        => true,
 
 			'no_empty_phpdoc'             => true,
 			'no_empty_statement'          => true,
@@ -103,12 +130,41 @@ return PhpCsFixer\Config::create()
 			'no_extra_blank_lines'        => true,
 			'no_blank_lines_after_phpdoc' => true,
 
+			'no_spaces_around_offset' => [
+				'positions' => [ 'outside' ],
+			],
+
 			'return_assignment'          => true,
 			'lowercase_static_reference' => true,
 
 			'method_chaining_indentation' => true,
+			'method_argument_space'       => [
+				'on_multiline' => 'ignore', // at least until they fix it
+				'keep_multiple_spaces_after_comma' => true,
+			],
 
-			'elseif' => true,
+			'multiline_comment_opening_closing' => true,
+
+			'include' => true,
+			'elseif'  => true,
+
+			'simple_to_complex_string_variable' => true,
+
+			'global_namespace_import' => [
+				'import_classes'   => false,
+				'import_constants' => false,
+				'import_functions' => false,
+			],
+
+			'trailing_comma_in_multiline' => true,
+			'single_line_comment_style' => true,
+
+			'is_null' => true,
+			'yoda_style' => [
+				'equal' => false,
+				'identical' => false,
+				'less_and_greater' => null,
+			],
 		]
 	)
 	->setFinder($finder);
