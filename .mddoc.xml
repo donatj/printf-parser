@@ -4,7 +4,9 @@
 			<badge-poser type="version"/>
 			<badge-poser type="downloads"/>
 			<badge-poser type="license"/>
-			<badge-travis name="donatj/printf-parser"/>
+
+			<badge-github-action name="donatj/printf-parser" workflow="CI"/>
+
 			<badge-scrutinizer name="donatj/printf-parser" type="quality"/>
 			<badge-scrutinizer name="donatj/printf-parser" type="coverage"/>
 			<text><![CDATA[
