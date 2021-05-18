@@ -92,27 +92,32 @@ class Parser {
 				case '0':
 					$padChar = '0';
 					$next    = $lexer->next();
+
 					continue 2;
 				case ' ':
 					$padChar = ' ';
 					$next    = $lexer->next();
+
 					continue 2;
 				case "'":
 					$next    = $lexer->next();
 					$padChar = $next->getString();
 					$next    = $lexer->next();
+
 					continue 2;
 			}
 
 			if( $next->getString() === '-' ) {
 				$leftJustified = true;
 				$next          = $lexer->next();
+
 				continue;
 			}
 
 			if( $next->getString() === '+' ) {
 				$showPositive = true;
 				$next         = $lexer->next();
+
 				continue;
 			}
 

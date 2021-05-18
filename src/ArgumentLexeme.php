@@ -135,8 +135,6 @@ class ArgumentLexeme extends Lexeme {
 
 	/**
 	 * Is Lexeme left justified?
-	 *
-	 * @return bool
 	 */
 	public function getLeftJustified() : bool {
 		return $this->leftJustified;
