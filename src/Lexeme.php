@@ -10,17 +10,11 @@ class Lexeme {
 	public const T_INVALID        = '';
 	public const T_LITERAL_STRING = '!';
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	protected $lexItemType;
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	protected $val;
-	/**
-	 * @var int
-	 */
+	/** @var int */
 	protected $pos;
 
 	/**
@@ -43,7 +37,9 @@ class Lexeme {
 		return $this->val;
 	}
 
-	/** The string position of the given lexeme */
+	/**
+	 * The string position of the given lexeme
+	 */
 	public function getPos() : int {
 		return $this->pos;
 	}

@@ -6,9 +6,7 @@ class StringLexer {
 
 	private $pos = 0;
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	private $string;
 
 	/**

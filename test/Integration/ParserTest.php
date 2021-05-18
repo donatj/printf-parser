@@ -24,6 +24,7 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 					$this->serialized .= "[{$lexItem->getLexItemType()}={$lexItem->getVal()}:{$lexItem->getPos()}]";
 				}
 			}
+
 		};
 
 		(new Parser($emitter))->parseStr($input);

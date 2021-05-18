@@ -9,9 +9,7 @@ namespace donatj\Printf;
  */
 class Parser {
 
-	/**
-	 * @var Emitter
-	 */
+	/** @var Emitter */
 	private $emitter;
 
 	/**
