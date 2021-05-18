@@ -26,6 +26,8 @@ Parses printf style strings, e.g. `cats: %d` into inspectable lexemes.
 				<file name="src/Parser.php"/>
 				<file name="src/LexemeEmitter.php"/>
 				<file name="src/LexemeCollection.php"/>
+				<file name="src/Lexeme.php"/>
+				<file name="src/ArgumentLexeme.php"/>
 			</section>
 		</section>
 	</docpage>

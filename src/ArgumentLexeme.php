@@ -105,18 +105,22 @@ class ArgumentLexeme extends Lexeme {
 	}
 
 	/**
-	 * The argument position, such as `%3$s` would return 3 and `%s` would return null
+	 * The position specifier, such as `%3$s` would return 3 and `%s` would return null
+	 * @return int|null null on unspecified
 	 */
 	public function getArg() : ?int {
 		return $this->arg;
 	}
 
+	/**
+	 * Is the "Prefix positive numbers with a plus sign +" flag enabled
+	 */
 	public function getShowPositive() : bool {
 		return $this->showPositive;
 	}
 
 	/**
-	 * Specified pad character
+	 * Specified pad character flag
 	 *
 	 * @return string|null null on unspecified
 	 */
@@ -134,7 +138,7 @@ class ArgumentLexeme extends Lexeme {
 	}
 
 	/**
-	 * Is Lexeme left justified?
+	 * Is left-justification flag enabled?
 	 */
 	public function getLeftJustified() : bool {
 		return $this->leftJustified;
