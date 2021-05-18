@@ -1,6 +1,6 @@
 {
 	"name": "donatj/printf-parser",
-	"description": "PHP printf compatible printf string parser breaking printf strings into lexemes",
+	"description": "PHP printf-syntax compatible printf string parser. Parses printf strings into a stream of lexemes.",
 	"type": "library",
 	"require-dev": {
 		"donatj/drop": "*",

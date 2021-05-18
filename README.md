@@ -8,7 +8,9 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/donatj/printf-parser/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/donatj/printf-parser)
 
 
-Parses printf style strings, e.g. `cats: %d` into inspectable lexemes.
+PHP printf-syntax compatible printf string parser.
+
+Parses printf strings into a stream of lexemes.
 
 
 ## Requirements

@@ -10,7 +10,9 @@
 			<badge-scrutinizer name="donatj/printf-parser" type="quality"/>
 			<badge-scrutinizer name="donatj/printf-parser" type="coverage"/>
 			<text><![CDATA[
-Parses printf style strings, e.g. `cats: %d` into inspectable lexemes.
+PHP printf-syntax compatible printf string parser.
+
+Parses printf strings into a stream of lexemes.
 ]]></text>
 			<section title="Requirements">
 				<composer-requires/>
