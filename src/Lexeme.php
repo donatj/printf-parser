@@ -33,6 +33,9 @@ class Lexeme {
 		return $this->lexItemType;
 	}
 
+	/**
+	 * The text of the lexeme
+	 */
 	public function getVal() : string {
 		return $this->val;
 	}

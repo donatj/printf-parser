@@ -92,7 +92,7 @@ class ArgumentLexeme extends Lexeme {
 	 */
 	public function __construct(
 		string $lexItemType, string $val, int $pos,
-		?int $arg, ?bool $showPositive, ?string $padChar, ?int $padWidth, ?bool $leftJustified, ?int $precision
+		?int $arg, bool $showPositive, ?string $padChar, ?int $padWidth, ?bool $leftJustified, ?int $precision
 	) {
 		parent::__construct($lexItemType, $val, $pos);
 
@@ -104,11 +104,14 @@ class ArgumentLexeme extends Lexeme {
 		$this->precision     = $precision;
 	}
 
+	/**
+	 * The argument position, such as `%3$s` would return 3 and `%s` would return null
+	 */
 	public function getArg() : ?int {
 		return $this->arg;
 	}
 
-	public function getShowPositive() : ?bool {
+	public function getShowPositive() : bool {
 		return $this->showPositive;
 	}
 

@@ -70,7 +70,7 @@ class Parser {
 		$next = $lexer->next();
 
 		$arg           = null;
-		$showPositive  = null;
+		$showPositive  = false;
 		$padChar       = null;
 		$padWidth      = null;
 		$leftJustified = null;
