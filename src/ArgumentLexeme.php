@@ -92,7 +92,7 @@ class ArgumentLexeme extends Lexeme {
 	 */
 	public function __construct(
 		string $lexItemType, string $val, int $pos,
-		?int $arg, bool $showPositive, ?string $padChar, ?int $padWidth, ?bool $leftJustified, ?int $precision
+		?int $arg, bool $showPositive, ?string $padChar, ?int $padWidth, bool $leftJustified, ?int $precision
 	) {
 		parent::__construct($lexItemType, $val, $pos);
 
@@ -136,9 +136,9 @@ class ArgumentLexeme extends Lexeme {
 	/**
 	 * Is Lexeme left justified?
 	 *
-	 * @return bool|null null on unspecified
+	 * @return bool
 	 */
-	public function getLeftJustified() : ?bool {
+	public function getLeftJustified() : bool {
 		return $this->leftJustified;
 	}
 

@@ -73,7 +73,7 @@ class Parser {
 		$showPositive  = false;
 		$padChar       = null;
 		$padWidth      = null;
-		$leftJustified = null;
+		$leftJustified = false;
 		$precision     = null;
 
 		if( $next->getString() !== '0' && ctype_digit($next->getString()) ) {
