@@ -37,7 +37,7 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	/**
 	 * @internal
 	 */
-	public function offsetSet( $offset, $value ) {
+	public function offsetSet( $offset, $value ) : void {
 		if( $offset === null ) {
 			$this->lexItems[] = $value;
 		} else {
@@ -48,28 +48,28 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	/**
 	 * @internal
 	 */
-	public function offsetExists( $offset ) {
+	public function offsetExists( $offset ) : bool {
 		return isset($this->lexItems[$offset]);
 	}
 
 	/**
 	 * @internal
 	 */
-	public function offsetUnset( $offset ) {
+	public function offsetUnset( $offset ) : void {
 		unset($this->lexItems[$offset]);
 	}
 
 	/**
 	 * @internal
 	 */
-	public function offsetGet( $offset ) {
+	public function offsetGet( $offset ) : ?Lexeme {
 		return $this->lexItems[$offset] ?? null;
 	}
 
 	/**
 	 * @internal
 	 */
-	public function getIterator() {
+	public function getIterator() : \ArrayIterator {
 		return new \ArrayIterator($this->lexItems);
 	}
 
