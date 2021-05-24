@@ -164,7 +164,7 @@ class Parser {
 		);
 	}
 
-	private function eatInt( StringLexer $lexer ) : string {
+	private function eatInt( StringLexer $lexer ) : ?int {
 		$int = '';
 		while( ($next = $lexer->next()) && !$next->isEof() ) {
 			if( !ctype_digit($next->getString()) ) {
@@ -175,7 +175,11 @@ class Parser {
 			$int .= $next->getString();
 		}
 
-		return $int;
+		if( $int ) {
+			return (int)$int;
+		}
+
+		return null;
 	}
 
 }
