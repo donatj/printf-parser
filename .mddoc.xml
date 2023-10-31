@@ -5,7 +5,7 @@
 			<badge-poser type="downloads"/>
 			<badge-poser type="license"/>
 
-			<badge-github-action name="donatj/printf-parser" workflow="CI"/>
+			<badge-github-action name="donatj/printf-parser" workflow-file="ci.yml"/>
 
 			<badge-scrutinizer name="donatj/printf-parser" type="quality"/>
 			<badge-scrutinizer name="donatj/printf-parser" type="coverage"/>

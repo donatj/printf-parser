@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/donatj/printf-parser/version)](https://packagist.org/packages/donatj/printf-parser)
 [![Total Downloads](https://poser.pugx.org/donatj/printf-parser/downloads)](https://packagist.org/packages/donatj/printf-parser)
 [![License](https://poser.pugx.org/donatj/printf-parser/license)](https://packagist.org/packages/donatj/printf-parser)
-[![Build Status](https://github.com/donatj/printf-parser/workflows/CI/badge.svg?)](https://github.com/donatj/printf-parser/actions?query=workflow%3ACI)
+[![ci.yml](https://github.com/donatj/printf-parser/actions/workflows/ci.yml/badge.svg?)](https://github.com/donatj/printf-parser/actions/workflows/ci.yml)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/donatj/printf-parser/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/donatj/printf-parser)
 [![Code Coverage](https://scrutinizer-ci.com/g/donatj/printf-parser/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/donatj/printf-parser)
 
@@ -250,11 +250,11 @@ Available since PHP 5.0.3. */
 	public const ARG_TYPE_INT = 'int';
 	public const ARG_TYPE_DOUBLE = 'float';
 	public const ARG_TYPE_STRING = 'string';
-	/** @var int[] string    s */
+	/** @var string[] string    s */
 	public const STRING_TYPES = [self::T_STRING];
-	/** @var int[] integer    d, u, c, o, x, X, b */
+	/** @var string[] integer    d, u, c, o, x, X, b */
 	public const INTEGER_TYPES = [self::T_INT, self::T_INT_UNSIGNED, self::T_INT_AS_CHARACTER, self::T_INT_AS_OCTAL, self::T_INT_HEX, self::T_INT_HEX_CAP, self::T_INT_AS_BINARY];
-	/** @var int[] double    g, G, e, E, f, F */
+	/** @var string[] double    g, G, e, E, f, F */
 	public const DOUBLE_TYPES = [self::T_FLOAT_AUTO_SCI, self::T_FLOAT_AUTO_SCI_CAP, self::T_DOUBLE_AS_SCI, self::T_DOUBLE_AS_SCI_CAP, self::T_FLOAT_LOCALE, self::T_FLOAT_NO_LOCALE];
 	public const T_INVALID = '';
 	public const T_LITERAL_STRING = '!';

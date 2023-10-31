@@ -62,10 +62,10 @@ class ArgumentLexeme extends Lexeme {
 	public const ARG_TYPE_DOUBLE  = 'float';
 	public const ARG_TYPE_STRING  = 'string';
 
-	/** @var int[] string    s */
+	/** @var string[] string    s */
 	public const STRING_TYPES = [ self::T_STRING ];
 
-	/** @var int[] integer    d, u, c, o, x, X, b */
+	/** @var string[] integer    d, u, c, o, x, X, b */
 	public const INTEGER_TYPES = [
 		self::T_INT, self::T_INT_UNSIGNED,
 		self::T_INT_AS_CHARACTER, self::T_INT_AS_OCTAL,
@@ -73,18 +73,24 @@ class ArgumentLexeme extends Lexeme {
 		self::T_INT_AS_BINARY,
 	];
 
-	/** @var int[] double    g, G, e, E, f, F */
+	/** @var string[] double    g, G, e, E, f, F */
 	public const DOUBLE_TYPES = [
 		self::T_FLOAT_AUTO_SCI, self::T_FLOAT_AUTO_SCI_CAP,
 		self::T_DOUBLE_AS_SCI, self::T_DOUBLE_AS_SCI_CAP,
 		self::T_FLOAT_LOCALE, self::T_FLOAT_NO_LOCALE,
 	];
 
+	/** @var int|null */
 	private $arg;
+	/** @var bool */
 	private $showPositive;
+	/** @var string|null */
 	private $padChar;
+	/** @var int|null */
 	private $padWidth;
+	/** @var bool */
 	private $leftJustified;
+	/** @var int|null */
 	private $precision;
 
 	/**
