@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/donatj/printf-parser/version)](https://packagist.org/packages/donatj/printf-parser)
 [![Total Downloads](https://poser.pugx.org/donatj/printf-parser/downloads)](https://packagist.org/packages/donatj/printf-parser)
 [![License](https://poser.pugx.org/donatj/printf-parser/license)](https://packagist.org/packages/donatj/printf-parser)
-[![ci.yml](https://github.com/donatj/printf-parser/actions/workflows/ci.yml/badge.svg?)](https://github.com/donatj/printf-parser/actions/workflows/ci.yml)
+[![ci.yml](https://github.com/donatj/printf-parser/actions/workflows/ci.yml/badge.svg)](https://github.com/donatj/printf-parser/actions/workflows/ci.yml)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/donatj/printf-parser/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/donatj/printf-parser)
 [![Code Coverage](https://scrutinizer-ci.com/g/donatj/printf-parser/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/donatj/printf-parser)
 
@@ -145,10 +145,10 @@ function argTypes() : array
 ##### Returns the list of expected arguments a 1-indexed map of the following
 
 ```  
-PrintfLexeme::ARG_TYPE_MISSING  
-PrintfLexeme::ARG_TYPE_INT  
-PrintfLexeme::ARG_TYPE_DOUBLE  
-PrintfLexeme::ARG_TYPE_STRING  
+ArgumentLexeme::ARG_TYPE_MISSING  
+ArgumentLexeme::ARG_TYPE_INT  
+ArgumentLexeme::ARG_TYPE_DOUBLE  
+ArgumentLexeme::ARG_TYPE_STRING  
 ```
 
 ##### Returns:
@@ -357,10 +357,10 @@ function argType() : string
 
 Returns based on the type of argument one of the following  
   
-PrintfLexeme::ARG_TYPE_MISSING  
-PrintfLexeme::ARG_TYPE_INT  
-PrintfLexeme::ARG_TYPE_DOUBLE  
-PrintfLexeme::ARG_TYPE_STRING
+ArgumentLexeme::ARG_TYPE_MISSING  
+ArgumentLexeme::ARG_TYPE_INT  
+ArgumentLexeme::ARG_TYPE_DOUBLE  
+ArgumentLexeme::ARG_TYPE_STRING
 
 ---
 

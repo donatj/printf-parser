@@ -162,10 +162,10 @@ class ArgumentLexeme extends Lexeme {
 	/**
 	 * Returns based on the type of argument one of the following
 	 *
-	 *   PrintfLexeme::ARG_TYPE_MISSING
-	 *   PrintfLexeme::ARG_TYPE_INT
-	 *   PrintfLexeme::ARG_TYPE_DOUBLE
-	 *   PrintfLexeme::ARG_TYPE_STRING
+	 *   ArgumentLexeme::ARG_TYPE_MISSING
+	 *   ArgumentLexeme::ARG_TYPE_INT
+	 *   ArgumentLexeme::ARG_TYPE_DOUBLE
+	 *   ArgumentLexeme::ARG_TYPE_STRING
 	 */
 	public function argType() : string {
 		if( in_array($this->lexItemType, self::INTEGER_TYPES, true) ) {

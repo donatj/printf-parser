@@ -86,10 +86,10 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	 * Returns the list of expected arguments a 1-indexed map of the following:
 	 *
 	 * ```
-	 * PrintfLexeme::ARG_TYPE_MISSING
-	 * PrintfLexeme::ARG_TYPE_INT
-	 * PrintfLexeme::ARG_TYPE_DOUBLE
-	 * PrintfLexeme::ARG_TYPE_STRING
+	 * ArgumentLexeme::ARG_TYPE_MISSING
+	 * ArgumentLexeme::ARG_TYPE_INT
+	 * ArgumentLexeme::ARG_TYPE_DOUBLE
+	 * ArgumentLexeme::ARG_TYPE_STRING
 	 * ```
 	 *
 	 * @return string[]
