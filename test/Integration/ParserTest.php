@@ -5,6 +5,7 @@ namespace Integration;
 use donatj\Printf\ArgumentLexeme;
 use donatj\Printf\Emitter;
 use donatj\Printf\Lexeme;
+use donatj\Printf\LexemeEmitter;
 use donatj\Printf\Parser;
 
 class ParserTest extends \PHPUnit\Framework\TestCase {
@@ -35,7 +36,7 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @return array<array{string,string}>
 	 */
-	public function parseStringProvider() : array {
+	public static function parseStringProvider() : array {
 		return [
 
 			[ 'What %%%f percent', '[!=What :0][!=%:6][f=f:8|||pos:|||left:|][!= percent:9]' ],
@@ -59,9 +60,40 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 
 			'invalid string handling' => [ '100%', '[!=100:0][=:4|||pos:|||left:|]' ],
 
-			'test positive argument' => ['%+10d %-+2d %+-2d', '[=+1:1|||pos:1|||left:|][!=0d :3][=-+2:7|||pos:1|||left:1|][!=d :10][=+-2:13|||pos:1|||left:1|][!=d:16]'],
+			'test positive argument' => [ '%+10d %-+2d %+-2d', '[=+1:1|||pos:1|||left:|][!=0d :3][=-+2:7|||pos:1|||left:1|][!=d :10][=+-2:13|||pos:1|||left:1|][!=d:16]' ],
 
 			'handle dumb flag parsing' => [ "%---+++---+-'x10d", '[d=---+++---+-\'x10d:1|||pos:1|x|10|left:1|]' ],
+		];
+	}
+
+	/**
+	 * @dataProvider printfWithTypeProvider
+	 */
+	public function testArgTypeLookup( string $input, array $expectedParts ) : void {
+		$emitter = new LexemeEmitter;
+		$parser  = new Parser($emitter);
+
+		$parser->parseStr($input);
+
+		$lexemes = $emitter->getLexemes();
+
+		$parts = [];
+		foreach( $lexemes as $lexeme ) {
+			if( $lexeme instanceof ArgumentLexeme ) {
+				$parts[] = [ $lexeme->argType() ];
+			} else {
+				$parts[] = $lexeme->getVal();
+			}
+		}
+
+		$this->assertSame($expectedParts, $parts);
+	}
+
+	public static function printfWithTypeProvider() : array {
+		return [
+			[ 'no args', [ 'no args' ] ],
+			[ 'cats on roofs %f', [ 'cats on roofs ', [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ] ],
+			[ 'percent of %s: %d%%', [ 'percent of ', [ ArgumentLexeme::ARG_TYPE_STRING ], ': ', [ ArgumentLexeme::ARG_TYPE_INT ], '%' ] ],
 		];
 	}
 
