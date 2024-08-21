@@ -67,7 +67,7 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param array<string|array{string}> $expectedParts
+	 * @param array<array{string}|string> $expectedParts
 	 * @dataProvider printfWithTypeProvider
 	 */
 	public function testArgTypeLookup( string $input, array $expectedParts ) : void {
@@ -91,7 +91,7 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @return array<array{string,array<string|array{string}>}>
+	 * @return array<array{string,array<array{string}|string>}>
 	 */
 	public static function printfWithTypeProvider() : array {
 		return [
