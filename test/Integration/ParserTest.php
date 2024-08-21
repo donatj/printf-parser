@@ -12,9 +12,10 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider parseStringProvider
 	 */
-	public function testParsing( $input, $serialized ) : void {
+	public function testParsing( string $input, string $serialized ) : void {
 		$emitter = new class implements Emitter {
 
+			/** @var string */
 			public $serialized = '';
 
 			public function emit( Lexeme $lexItem ) : void {
@@ -31,6 +32,9 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame($serialized, $emitter->serialized);
 	}
 
+	/**
+	 * @return array<array{string,string}>
+	 */
 	public function parseStringProvider() : array {
 		return [
 

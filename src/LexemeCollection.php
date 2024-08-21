@@ -4,6 +4,9 @@ namespace donatj\Printf;
 
 /**
  * LexemeCollection is an immutable iterable collection of Lexemes with ArrayAccess
+ *
+ * @implements \IteratorAggregate<\donatj\Printf\Lexeme>
+ * @implements \ArrayAccess<int,\donatj\Printf\Lexeme>
  */
 class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 
@@ -67,6 +70,7 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	}
 
 	/**
+	 * @return \ArrayIterator<int,\donatj\Printf\Lexeme>
 	 * @internal
 	 */
 	public function getIterator() : \ArrayIterator {

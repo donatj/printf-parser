@@ -4,6 +4,7 @@ namespace donatj\Printf;
 
 class StringLexer {
 
+	/** @var int */
 	private $pos = 0;
 
 	/** @var string */
@@ -16,7 +17,7 @@ class StringLexer {
 		$this->string = $string;
 	}
 
-	public function peek( $size = 1 ) : CharData {
+	public function peek( int $size = 1 ) : CharData {
 		$str = substr($this->string, $this->pos, $size);
 
 		return new CharData($str, strlen($str) < $size);
@@ -48,7 +49,7 @@ class StringLexer {
 		return $peek->getString() === $prefix;
 	}
 
-	public function substr( $start, $length ) : string {
+	public function substr( int $start, int $length ) : string {
 		return substr($this->string, $start, $length);
 	}
 
