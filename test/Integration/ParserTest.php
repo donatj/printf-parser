@@ -68,9 +68,10 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param array<array{string}|string> $expectedParts
+	 * @param array<int,string>           $args
 	 * @dataProvider printfWithTypeProvider
 	 */
-	public function testArgTypeLookup( string $input, array $expectedParts ) : void {
+	public function testArgTypeLookup( string $input, array $expectedParts, array $args, bool $invalid = false ) : void {
 		$emitter = new LexemeEmitter;
 		$parser  = new Parser($emitter);
 
@@ -88,16 +89,48 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		$this->assertSame($expectedParts, $parts);
+
+		if( $invalid ) {
+			$this->assertInstanceOf(Lexeme::class, $lexemes->getInvalid());
+		} else {
+			$this->assertNull($lexemes->getInvalid());
+		}
+
+		$this->assertSame($args, $lexemes->argTypes());
 	}
 
 	/**
-	 * @return array<array{string,array<array{string}|string>}>
+	 * @return array<array{string,array<array{string}|string>,array<int,string>,bool}>
 	 */
 	public static function printfWithTypeProvider() : array {
 		return [
-			[ 'no args', [ 'no args' ] ],
-			[ 'cats on roofs %f', [ 'cats on roofs ', [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ] ],
-			[ 'percent of %s: %d%%', [ 'percent of ', [ ArgumentLexeme::ARG_TYPE_STRING ], ': ', [ ArgumentLexeme::ARG_TYPE_INT ], '%' ] ],
+			[ 'no args', [ 'no args' ], [], false ],
+			[
+				'cats on roofs %f',
+				[ 'cats on roofs ', [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_DOUBLE ],
+				false,
+			],
+			[
+				'percent of %s: %d%%',
+				[ 'percent of ', [ ArgumentLexeme::ARG_TYPE_STRING ], ': ', [ ArgumentLexeme::ARG_TYPE_INT ], '%' ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_STRING, ArgumentLexeme::ARG_TYPE_INT ],
+				false,
+			],
+
+			// Invalid
+			[
+				'100%',
+				[ '100', [ ArgumentLexeme::ARG_TYPE_MISSING ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_MISSING ],
+				true,
+			],
+			[
+				'%d %s %',
+				[ [ ArgumentLexeme::ARG_TYPE_INT ], ' ', [ ArgumentLexeme::ARG_TYPE_STRING ], ' ', [ ArgumentLexeme::ARG_TYPE_MISSING ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_INT, ArgumentLexeme::ARG_TYPE_STRING, ArgumentLexeme::ARG_TYPE_MISSING ],
+				true,
+			],
 		];
 	}
 
