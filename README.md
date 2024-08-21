@@ -66,7 +66,7 @@ d -> 'd' arg type: int
 
 ## Documentation
 
-### Class: \donatj\Printf\Parser
+### Class: donatj\Printf\Parser
 
 Parser implements a PHP Printf compatible Printf string parser.
 
@@ -92,7 +92,7 @@ function parseStr(string $string) : void
 
 Parses a printf string and emit parsed lexemes to the configured Emitter
 
-### Class: \donatj\Printf\LexemeEmitter
+### Class: donatj\Printf\LexemeEmitter
 
 ---
 
@@ -104,7 +104,7 @@ function getLexemes() : \donatj\Printf\LexemeCollection
 
 Return the Lexemes received by the emitter as an immutable LexemeCollection
 
-### Class: \donatj\Printf\LexemeCollection
+### Class: donatj\Printf\LexemeCollection
 
 LexemeCollection is an immutable iterable collection of Lexemes with ArrayAccess
 
@@ -155,7 +155,7 @@ ArgumentLexeme::ARG_TYPE_STRING
 
 - ***string[]***
 
-### Class: \donatj\Printf\Lexeme
+### Class: donatj\Printf\Lexeme
 
 Lexeme represents a "basic" component of a printf string - either Literal Strings "!" or Invalid Lexemes
 
@@ -207,7 +207,7 @@ function getPos() : int
 
 The string position of the given lexeme
 
-### Class: \donatj\Printf\ArgumentLexeme
+### Class: donatj\Printf\ArgumentLexeme
 
 ```php
 <?php

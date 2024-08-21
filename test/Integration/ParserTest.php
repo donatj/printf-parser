@@ -67,6 +67,7 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * @param array<string|array{string}> $expectedParts
 	 * @dataProvider printfWithTypeProvider
 	 */
 	public function testArgTypeLookup( string $input, array $expectedParts ) : void {
@@ -89,6 +90,9 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame($expectedParts, $parts);
 	}
 
+	/**
+	 * @return array<array{string,array<string|array{string}>}>
+	 */
 	public static function printfWithTypeProvider() : array {
 		return [
 			[ 'no args', [ 'no args' ] ],
