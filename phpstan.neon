@@ -4,4 +4,4 @@ parameters:
 	paths:
 		- src
 		- test
-	phpVersion: 70100
+	phpVersion: 70200
