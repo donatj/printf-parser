@@ -6,6 +6,7 @@ fix: cbf
 .PHONY: test
 test: cs
 	vendor/bin/phpunit
+	vendor/bin/phpstan
 
 .PHONY: cs
 cs:

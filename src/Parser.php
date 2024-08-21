@@ -27,7 +27,12 @@ class Parser {
 	public function parseStr( string $string ) : void {
 		$lexer = new StringLexer($string);
 
-		while( ($next = $lexer->next()) && !$next->isEof() ) {
+		for(;;) {
+			$next = $lexer->next();
+			if( $next->isEof() ) {
+				break;
+			}
+
 			if( $next->getString() === '%' ) {
 				if( $lexer->hasPrefix('%') ) {
 					$this->emitter->emit(
@@ -51,7 +56,12 @@ class Parser {
 	private function lexString( Emitter $emitter, StringLexer $lexer ) : void {
 		$pos    = $lexer->pos();
 		$buffer = '';
-		while( ($next = $lexer->next()) && !$next->isEof() ) {
+		for(;;) {
+			$next = $lexer->next();
+			if( $next->isEof() ) {
+				break;
+			}
+
 			if( $next->getString() === '%' ) {
 				$lexer->rewind();
 				break;
@@ -166,7 +176,12 @@ class Parser {
 
 	private function eatInt( StringLexer $lexer ) : ?int {
 		$int = '';
-		while( ($next = $lexer->next()) && !$next->isEof() ) {
+		for(;;) {
+			$next = $lexer->next();
+			if( $next->isEof() ) {
+				break;
+			}
+
 			if( !ctype_digit($next->getString()) ) {
 				$lexer->rewind();
 				break;
