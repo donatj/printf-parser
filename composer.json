@@ -5,7 +5,7 @@
 	"require-dev": {
 		"donatj/drop": "*",
 		"phpunit/phpunit": "~8 | ~9",
-		"corpus/coding-standard": "^0.6.0",
+		"corpus/coding-standard": "^0.6.0 || ^0.8.0",
 		"squizlabs/php_codesniffer": "^3.10",
 		"friendsofphp/php-cs-fixer": "^3.4",
 		"phpstan/phpstan": "^1.11"
