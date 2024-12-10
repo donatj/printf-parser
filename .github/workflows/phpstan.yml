@@ -2,16 +2,16 @@ on:
   - pull_request
   - push
 
-name: CI
+name: PHPStan
 
 jobs:
   run:
-    name: Tests
+    name: Analyze code with PHPStan
 
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-versions: [ '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4' ]
+        php-versions: [ '8.4' ]
 
     runs-on: ${{ matrix.operating-system }}
 
@@ -28,4 +28,4 @@ jobs:
         run: composer install
 
       - name: Run tests
-        run: make ci
+        run: make phpstan
