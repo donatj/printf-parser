@@ -10,12 +10,9 @@ class Lexeme {
 	public const T_INVALID        = '';
 	public const T_LITERAL_STRING = '!';
 
-	/** @var string */
-	protected $lexItemType;
-	/** @var string */
-	protected $val;
-	/** @var int */
-	protected $pos;
+	protected string $lexItemType;
+	protected string $val;
+	protected int $pos;
 
 	/**
 	 * LexItem constructor.

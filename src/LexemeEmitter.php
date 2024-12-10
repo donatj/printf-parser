@@ -5,7 +5,7 @@ namespace donatj\Printf;
 class LexemeEmitter implements Emitter {
 
 	/** @var Lexeme[] */
-	private $lexemes = [];
+	private array $lexemes = [];
 
 	/**
 	 * @internal This is for use by the Parser

@@ -15,7 +15,7 @@ Parses printf strings into a stream of lexemes.
 
 ## Requirements
 
-- **php**: >=7.2
+- **php**: >=7.4
 
 ## Installing
 

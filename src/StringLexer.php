@@ -4,11 +4,9 @@ namespace donatj\Printf;
 
 class StringLexer {
 
-	/** @var int */
-	private $pos = 0;
+	private int $pos = 0;
 
-	/** @var string */
-	private $string;
+	private string $string;
 
 	/**
 	 * StringScanner constructor.
