@@ -4,10 +4,8 @@ namespace donatj\Printf;
 
 class CharData {
 
-	/** @var string */
-	private $string;
-	/** @var bool */
-	private $eof;
+	private string $string;
+	private bool $eof;
 
 	public function __construct( string $string, bool $eof ) {
 		$this->string = $string;

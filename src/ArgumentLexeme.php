@@ -80,18 +80,12 @@ class ArgumentLexeme extends Lexeme {
 		self::T_FLOAT_LOCALE, self::T_FLOAT_NO_LOCALE,
 	];
 
-	/** @var int|null */
-	private $arg;
-	/** @var bool */
-	private $showPositive;
-	/** @var string|null */
-	private $padChar;
-	/** @var int|null */
-	private $padWidth;
-	/** @var bool */
-	private $leftJustified;
-	/** @var int|null */
-	private $precision;
+	private ?int $arg;
+	private bool $showPositive;
+	private ?string $padChar;
+	private ?int $padWidth;
+	private bool $leftJustified;
+	private ?int $precision;
 
 	/**
 	 * ArgumentLexeme constructor.

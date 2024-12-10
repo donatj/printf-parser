@@ -7,8 +7,9 @@ use donatj\Printf\Emitter;
 use donatj\Printf\Lexeme;
 use donatj\Printf\LexemeEmitter;
 use donatj\Printf\Parser;
+use PHPUnit\Framework\TestCase;
 
-class ParserTest extends \PHPUnit\Framework\TestCase {
+class ParserTest extends TestCase {
 
 	/**
 	 * @dataProvider parseStringProvider
@@ -16,8 +17,7 @@ class ParserTest extends \PHPUnit\Framework\TestCase {
 	public function testParsing( string $input, string $serialized ) : void {
 		$emitter = new class implements Emitter {
 
-			/** @var string */
-			public $serialized = '';
+			public string $serialized = '';
 
 			public function emit( Lexeme $lexItem ) : void {
 				if( $lexItem instanceof ArgumentLexeme ) {
