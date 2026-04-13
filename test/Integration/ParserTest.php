@@ -170,4 +170,44 @@ class ParserTest extends TestCase {
 		];
 	}
 
+	/**
+	 * @return \Generator<int|string,array<string,string>>
+	 */
+	public static function printProvider() : \Generator {
+		foreach( self::parseStringProvider() as $input => $args ) {
+			if($args[2] === false) {
+				continue;
+			}
+
+			$canonical = $args[0];
+			if(is_string($args[2])) {
+				$canonical = $args[2];
+			}
+
+			// @phpstan-ignore generator.valueType (phpstan knows $args[0] is string, but insists it's an int here)
+			yield $input => [
+				$args[0],
+				$canonical,
+			];
+		}
+	}
+
+	/**
+	 * @dataProvider printProvider
+	 */
+	public function testPrinter(string $input, string $expected) : void {
+		$emitter = new LexemeEmitter;
+		$parser  = new Parser($emitter);
+		$parser->parseStr($input);
+
+		$printer = new Printer;
+		$actual  = $printer->print($emitter->getLexemes());
+
+		try {
+			$this->assertSame($expected, $actual, sprintf('"%s" != "%s"', $actual, $expected));
+		}catch( \Exception $e ) {
+			$this->fail("Printer threw an exception for input: {$input}\nException message: " . $e->getMessage());
+		}
+	}
+
 }
