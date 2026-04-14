@@ -11,7 +11,7 @@ namespace donatj\Printf;
 class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 
 	/** @var Lexeme[] */
-	private $lexItems;
+	private array $lexItems;
 
 	/**
 	 * LexemeCollection constructor.
