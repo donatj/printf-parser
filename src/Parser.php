@@ -136,13 +136,11 @@ class Parser {
 			break;
 		}
 
-		$lexer->rewind();
-		$peek = $lexer->peek();
-		if( ctype_digit($peek->getString()) ) {
+		if( ctype_digit($next->getString()) ) {
+			$lexer->rewind();
 			$padWidth = $this->eatInt($lexer);
+			$next     = $lexer->next();
 		}
-
-		$next = $lexer->next();
 
 		if( $next->getString() === '.' ) {
 			if( ctype_digit($lexer->peek()->getString()) ) {
