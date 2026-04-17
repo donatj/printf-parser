@@ -92,6 +92,9 @@ class Parser {
 				$lexer->next();
 				$next = $lexer->next();
 				$arg  = $int;
+			} else {
+				$padWidth = $int;
+				$next     = $lexer->next();
 			}
 		}
 
@@ -133,15 +136,13 @@ class Parser {
 			break;
 		}
 
-		if( $padChar !== null ) {
-			$lexer->rewind();
-			$peek = $lexer->peek();
-			if( ctype_digit($peek->getString()) ) {
-				$padWidth = $this->eatInt($lexer);
-			}
-
-			$next = $lexer->next();
+		$lexer->rewind();
+		$peek = $lexer->peek();
+		if( ctype_digit($peek->getString()) ) {
+			$padWidth = $this->eatInt($lexer);
 		}
+
+		$next = $lexer->next();
 
 		if( $next->getString() === '.' ) {
 			if( ctype_digit($lexer->peek()->getString()) ) {
