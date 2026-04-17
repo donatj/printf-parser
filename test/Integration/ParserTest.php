@@ -56,7 +56,7 @@ class ParserTest extends TestCase {
 	public static function parseStringProvider() : array {
 		return [
 			[ '%% foo %%', '[!=%:1][!= foo :2][!=%:8]', true ],
-			[ '%10d', '[d=10d:1|||pos:||10|left:|]', true ],
+			[ '%11d%+22d%-33d', '[d=11d:1|||pos:||11|left:|][d=+22d:5|||pos:1||22|left:|][d=-33d:10|||pos:||33|left:1|]', true ],
 			[ 'What %%%f percent', '[!=What :0][!=%:6][f=f:8|||pos:|||left:|][!= percent:9]', true ],
 			// test all padding types
 			[ '%012d % 12d %\'x12d', '[d=012d:1|||pos:|0|12|left:|][!= :5][d= 12d:7|||pos:| |12|left:|][!= :11][d=\'x12d:13|||pos:|x|12|left:|]', true ],
