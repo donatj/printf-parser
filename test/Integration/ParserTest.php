@@ -51,7 +51,7 @@ class ParserTest extends TestCase {
 	}
 
 	/**
-	 * @return array<array{string,string,bool|string}> the string to test, it's summarized parse, canonical form/true if already canonical/false if invalid
+	 * @return array<array{string,string,bool|string}> the string to test, its summarized parse, canonical form/true if already canonical/false if invalid
 	 */
 	public static function parseStringProvider() : array {
 		return [
