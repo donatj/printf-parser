@@ -85,6 +85,8 @@ class ParserTest extends TestCase {
 				false,
 			],
 
+			'eof mid padding parse' => [ '%+10', '[=+10:1|||pos:1||10|left:|]', false],
+
 			'test positive argument' => [
 				'%+10d %-+2d %+-2d',
 				'[d=+10d:1|||pos:1||10|left:|][!= :5][d=-+2d:7|||pos:1||2|left:1|][!= :11][d=+-2d:13|||pos:1||2|left:1|]',
