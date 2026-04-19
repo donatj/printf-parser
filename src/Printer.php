@@ -49,7 +49,7 @@ class Printer {
 			$out .= $lexeme->getShowPositive() ? '+' : '';
 
 			if( $lexeme->getWidthArgumentIndex() !== null ) {
-				$out .= $lexeme->getWidthArgumentIndex() === ArgumentLexeme::ARG_IMPLICIT
+				$out .= $lexeme->getWidthArgumentIndex() === ArgumentLexeme::ARG_INDEX_IMPLICIT
 					? '*'
 					: '*' . $lexeme->getWidthArgumentIndex() . '$';
 			} else {
@@ -57,7 +57,7 @@ class Printer {
 			}
 
 			if( $lexeme->getPrecisionArgumentIndex() !== null ) {
-				$out .= $lexeme->getPrecisionArgumentIndex() === ArgumentLexeme::ARG_IMPLICIT
+				$out .= $lexeme->getPrecisionArgumentIndex() === ArgumentLexeme::ARG_INDEX_IMPLICIT
 					? '.*'
 					: '.*' . $lexeme->getPrecisionArgumentIndex() . '$';
 			} else {

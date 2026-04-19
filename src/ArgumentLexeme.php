@@ -69,7 +69,7 @@ class ArgumentLexeme extends Lexeme {
 	public const ARG_TYPE_STRING  = 'string';
 
 	/** @var int magic number indicating a dynamic width/precision argument with an implicit (positional) argument index */
-	public const ARG_IMPLICIT = 0;
+	public const ARG_INDEX_IMPLICIT = 0;
 
 	/** @var string[] string    s */
 	public const STRING_TYPES = [ self::T_STRING ];
@@ -171,7 +171,7 @@ class ArgumentLexeme extends Lexeme {
 	/**
 	 * The argument index supplying a dynamic width, or null if width is static.
 	 *
-	 * Returns ARG_IMPLICIT (0) when the width argument is taken from the implicit argument list,
+	 * Returns ARG_INDEX_IMPLICIT (0) when the width argument is taken from the implicit argument list,
 	 * or an explicit 1-based index when written as `*N$`.
 	 *
 	 * @return int|null null when width is not dynamic
@@ -183,7 +183,7 @@ class ArgumentLexeme extends Lexeme {
 	/**
 	 * The argument index supplying a dynamic precision, or null if precision is static.
 	 *
-	 * Returns ARG_IMPLICIT (0) when the precision argument is taken from the implicit argument list,
+	 * Returns ARG_INDEX_IMPLICIT (0) when the precision argument is taken from the implicit argument list,
 	 * or an explicit 1-based index when written as `.*N$`.
 	 *
 	 * @return int|null null when precision is not dynamic
