@@ -226,16 +226,19 @@ class Parser {
 			$ch = $str[$size - 1];
 			if( ctype_digit($ch) ) {
 				$buf .= $ch;
-			} elseif( $ch === '$' && $buf !== '' ) {
+				continue;
+			}
+
+			if( $ch === '$' && $buf !== '' ) {
 				// Consume the digits and the '$'
 				for( $i = 0; $i < $size; $i++ ) {
 					$lexer->next();
 				}
 
 				return (int)$buf;
-			} else {
-				return null;
 			}
+
+			return null;
 		}
 	}
 
