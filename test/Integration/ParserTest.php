@@ -14,8 +14,8 @@ class ParserTest extends TestCase {
 
 	/**
 	 * @param bool|string $valid true if the input is fully valid, false if invalid, or a string with the canonical form if the input is valid but not canonical
-	 * @dataProvider parseStringProvider
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('parseStringProvider')]
 	public function testParsing( string $input, string $serialized, $valid ) : void {
 		$lexemeEmitter = new LexemeEmitter;
 		$emitter = new class($lexemeEmitter) implements Emitter {
@@ -182,8 +182,8 @@ class ParserTest extends TestCase {
 	 * @param array<array{string}|string> $expectedParts
 	 * @param array<int,string>           $args
 	 * @param bool                        $valid         false if the input is expected to produce invalid lexemes
-	 * @dataProvider printfWithTypeProvider
 	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('printfWithTypeProvider')]
 	public function testArgTypeLookup( string $input, array $expectedParts, array $args, bool $valid = true ) : void {
 		$emitter = new LexemeEmitter;
 		$parser  = new Parser($emitter);
@@ -344,9 +344,7 @@ class ParserTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider printProvider
-	 */
+	#[\PHPUnit\Framework\Attributes\DataProvider('printProvider')]
 	public function testPrinter(string $input, string $expected) : void {
 		$emitter = new LexemeEmitter;
 		$parser  = new Parser($emitter);

@@ -3,13 +3,13 @@
 	"description": "PHP printf-syntax compatible printf string parser. Parses printf strings into a stream of lexemes.",
 	"type": "library",
 	"require-dev": {
-		"donatj/drop": "~1",
-		"phpunit/phpunit": "~9",
+		"bamarni/composer-bin-plugin": "^1.8",
 		"corpus/coding-standard": "^0.9.0",
-		"squizlabs/php_codesniffer": "^3.13",
+		"donatj/drop": "~1",
 		"friendsofphp/php-cs-fixer": "^3.94",
 		"phpstan/phpstan": "=2.1.45",
-		"donatj/mddoc": "^0.10"
+		"phpunit/phpunit": "^12.5",
+		"squizlabs/php_codesniffer": "^3.13"
 	},
 	"license": "MIT",
 	"authors": [
@@ -28,7 +28,14 @@
 	},
 	"config": {
 		"allow-plugins": {
+			"bamarni/composer-bin-plugin": true,
 			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"extra": {
+		"bamarni-bin": {
+			"bin-links": true,
+			"forward-command": false
 		}
 	}
 }
