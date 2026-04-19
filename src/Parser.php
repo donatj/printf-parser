@@ -226,6 +226,7 @@ class Parser {
 			$ch = $str[$size - 1];
 			if( ctype_digit($ch) ) {
 				$buf .= $ch;
+
 				continue;
 			}
 

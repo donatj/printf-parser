@@ -103,8 +103,27 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 		$args     = [];
 		foreach( $this->lexItems as $item ) {
 			if( $item instanceof ArgumentLexeme ) {
-				$type = $item->argType();
+				$widthIdx = $item->getWidthArgumentIndex();
+				if( $widthIdx !== null ) {
+					if( $widthIdx === ArgumentLexeme::ARG_INDEX_IMPLICIT ) {
+						$args[$noNumInc] = ArgumentLexeme::ARG_TYPE_INT;
+						$noNumInc++;
+					} else {
+						$args[$widthIdx] = ArgumentLexeme::ARG_TYPE_INT;
+					}
+				}
 
+				$precIdx = $item->getPrecisionArgumentIndex();
+				if( $precIdx !== null ) {
+					if( $precIdx === ArgumentLexeme::ARG_INDEX_IMPLICIT ) {
+						$args[$noNumInc] = ArgumentLexeme::ARG_TYPE_INT;
+						$noNumInc++;
+					} else {
+						$args[$precIdx] = ArgumentLexeme::ARG_TYPE_INT;
+					}
+				}
+
+				$type = $item->argType();
 				if( $item->getArg() !== null ) {
 					$args[$item->getArg()] = $type;
 				} else {
@@ -113,6 +132,8 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 				}
 			}
 		}
+
+		ksort($args);
 
 		return $args;
 	}
