@@ -78,12 +78,14 @@ class Parser {
 		$pos  = $lexer->pos();
 		$next = $lexer->next();
 
-		$arg           = null;
-		$showPositive  = false;
-		$padChar       = null;
-		$padWidth      = null;
-		$leftJustified = false;
-		$precision     = null;
+		$arg                    = null;
+		$showPositive           = false;
+		$padChar                = null;
+		$padWidth               = null;
+		$leftJustified          = false;
+		$precision              = null;
+		$widthArgumentIndex     = null;
+		$precisionArgumentIndex = null;
 
 		if( $next->getString() !== '0' && ctype_digit($next->getString()) ) {
 			$lexer->rewind();
@@ -136,14 +138,25 @@ class Parser {
 			break;
 		}
 
-		if( ctype_digit($next->getString()) ) {
+		if( $next->getString() === '*' ) {
+			// Dynamic width — optional positional form *N$
+			$int                = $this->eatIntDollar($lexer);
+			$widthArgumentIndex = $int ?? ArgumentLexeme::ARG_INDEX_IMPLICIT;
+
+			$next = $lexer->next();
+		} elseif( ctype_digit($next->getString()) ) {
 			$lexer->rewind();
 			$padWidth = $this->eatInt($lexer);
 			$next     = $lexer->next();
 		}
 
 		if( $next->getString() === '.' ) {
-			if( ctype_digit($lexer->peek()->getString()) ) {
+			if( $lexer->peek()->getString() === '*' ) {
+				// Dynamic precision — optional positional form .*N$
+				$lexer->next(); // consume *
+				$int                    = $this->eatIntDollar($lexer);
+				$precisionArgumentIndex = $int ?? ArgumentLexeme::ARG_INDEX_IMPLICIT;
+			} elseif( ctype_digit($lexer->peek()->getString()) ) {
 				$precision = $this->eatInt($lexer);
 			}
 
@@ -167,7 +180,9 @@ class Parser {
 				$padChar,
 				$padWidth,
 				$leftJustified,
-				$precision
+				$precision,
+				$widthArgumentIndex,
+				$precisionArgumentIndex
 			)
 		);
 	}
@@ -193,6 +208,39 @@ class Parser {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Peeks ahead to consume an integer followed immediately by '$'.
+	 * Only advances the lexer when the full N$ pattern is present; returns null otherwise.
+	 */
+	private function eatIntDollar( StringLexer $lexer ) : ?int {
+		$buf = '';
+		for( $size = 1;; $size++ ) {
+			$peeked = $lexer->peek($size);
+			$str    = $peeked->getString();
+			if( strlen($str) < $size ) {
+				return null; // EOF before '$'
+			}
+
+			$ch = $str[$size - 1];
+			if( ctype_digit($ch) ) {
+				$buf .= $ch;
+
+				continue;
+			}
+
+			if( $ch === '$' && $buf !== '' ) {
+				// Consume the digits and the '$'
+				for( $i = 0; $i < $size; $i++ ) {
+					$lexer->next();
+				}
+
+				return (int)$buf;
+			}
+
+			return null;
+		}
 	}
 
 }

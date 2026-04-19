@@ -68,6 +68,9 @@ class ArgumentLexeme extends Lexeme {
 	public const ARG_TYPE_DOUBLE  = 'float';
 	public const ARG_TYPE_STRING  = 'string';
 
+	/** @var int magic number indicating a dynamic width/precision argument with an implicit (positional) argument index */
+	public const ARG_INDEX_IMPLICIT = 0;
+
 	/** @var string[] string    s */
 	public const STRING_TYPES = [ self::T_STRING ];
 
@@ -93,22 +96,27 @@ class ArgumentLexeme extends Lexeme {
 	private ?int $padWidth;
 	private bool $leftJustified;
 	private ?int $precision;
+	private ?int $widthArgumentIndex;
+	private ?int $precisionArgumentIndex;
 
 	/**
 	 * ArgumentLexeme constructor.
 	 */
 	public function __construct(
 		string $lexItemType, string $val, int $pos,
-		?int $arg, bool $showPositive, ?string $padChar, ?int $padWidth, bool $leftJustified, ?int $precision
+		?int $arg, bool $showPositive, ?string $padChar, ?int $padWidth, bool $leftJustified, ?int $precision,
+		?int $widthArgumentIndex = null, ?int $precisionArgumentIndex = null
 	) {
 		parent::__construct($lexItemType, $val, $pos);
 
-		$this->arg           = $arg;
-		$this->showPositive  = $showPositive;
-		$this->padChar       = $padChar;
-		$this->padWidth      = $padWidth;
-		$this->leftJustified = $leftJustified;
-		$this->precision     = $precision;
+		$this->arg                    = $arg;
+		$this->showPositive           = $showPositive;
+		$this->padChar                = $padChar;
+		$this->padWidth               = $padWidth;
+		$this->leftJustified          = $leftJustified;
+		$this->precision              = $precision;
+		$this->widthArgumentIndex     = $widthArgumentIndex;
+		$this->precisionArgumentIndex = $precisionArgumentIndex;
 	}
 
 	/**
@@ -158,6 +166,30 @@ class ArgumentLexeme extends Lexeme {
 	 */
 	public function getPrecision() : ?int {
 		return $this->precision;
+	}
+
+	/**
+	 * The argument index supplying a dynamic width, or null if width is static.
+	 *
+	 * Returns ARG_INDEX_IMPLICIT (0) when the width argument is taken from the implicit argument list,
+	 * or an explicit 1-based index when written as `*N$`.
+	 *
+	 * @return int|null null when width is not dynamic
+	 */
+	public function getWidthArgumentIndex() : ?int {
+		return $this->widthArgumentIndex;
+	}
+
+	/**
+	 * The argument index supplying a dynamic precision, or null if precision is static.
+	 *
+	 * Returns ARG_INDEX_IMPLICIT (0) when the precision argument is taken from the implicit argument list,
+	 * or an explicit 1-based index when written as `.*N$`.
+	 *
+	 * @return int|null null when precision is not dynamic
+	 */
+	public function getPrecisionArgumentIndex() : ?int {
+		return $this->precisionArgumentIndex;
 	}
 
 	/**

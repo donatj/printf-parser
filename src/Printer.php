@@ -47,8 +47,23 @@ class Printer {
 
 			$out .= $lexeme->getLeftJustified() ? '-' : '';
 			$out .= $lexeme->getShowPositive() ? '+' : '';
-			$out .= $lexeme->getPadWidth();
-			$out .= $lexeme->getPrecision() !== null ? '.' . $lexeme->getPrecision() : '';
+
+			if( $lexeme->getWidthArgumentIndex() !== null ) {
+				$out .= $lexeme->getWidthArgumentIndex() === ArgumentLexeme::ARG_INDEX_IMPLICIT
+					? '*'
+					: '*' . $lexeme->getWidthArgumentIndex() . '$';
+			} else {
+				$out .= $lexeme->getPadWidth();
+			}
+
+			if( $lexeme->getPrecisionArgumentIndex() !== null ) {
+				$out .= $lexeme->getPrecisionArgumentIndex() === ArgumentLexeme::ARG_INDEX_IMPLICIT
+					? '.*'
+					: '.*' . $lexeme->getPrecisionArgumentIndex() . '$';
+			} else {
+				$out .= $lexeme->getPrecision() !== null ? '.' . $lexeme->getPrecision() : '';
+			}
+
 			$out .= $type;
 		}
 

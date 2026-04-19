@@ -28,7 +28,16 @@ class ParserTest extends TestCase {
 			public function emit( Lexeme $lexItem ) : void {
 				$this->lexemeEmitter->emit($lexItem);
 				if( $lexItem instanceof ArgumentLexeme ) {
-					$this->serialized .= "[{$lexItem->getLexItemType()}={$lexItem->getVal()}:{$lexItem->getPos()}||{$lexItem->getArg()}|pos:{$lexItem->getShowPositive()}|{$lexItem->getPadChar()}|{$lexItem->getPadWidth()}|left:{$lexItem->getLeftJustified()}|{$lexItem->getPrecision()}]";
+					$s = "[{$lexItem->getLexItemType()}={$lexItem->getVal()}:{$lexItem->getPos()}||{$lexItem->getArg()}|pos:{$lexItem->getShowPositive()}|{$lexItem->getPadChar()}|{$lexItem->getPadWidth()}|left:{$lexItem->getLeftJustified()}|{$lexItem->getPrecision()}";
+					if( $lexItem->getWidthArgumentIndex() !== null ) {
+						$s .= "|w:{$lexItem->getWidthArgumentIndex()}";
+					}
+
+					if( $lexItem->getPrecisionArgumentIndex() !== null ) {
+						$s .= "|p:{$lexItem->getPrecisionArgumentIndex()}";
+					}
+
+					$this->serialized .= $s . ']';
 				} else {
 					$this->serialized .= "[{$lexItem->getLexItemType()}={$lexItem->getVal()}:{$lexItem->getPos()}]";
 				}
@@ -112,6 +121,42 @@ class ParserTest extends TestCase {
 				'[d=---+++---+-\'x10d:1|||pos:1|x|10|left:1|]',
 				"%'x-+10d",
 			],
+
+			'dynamic width' => [
+				'%*s %*3$s %1$*2$s',
+				'[s=*s:1|||pos:|||left:||w:0][!= :3][s=*3$s:5|||pos:|||left:||w:3][!= :9][s=1$*2$s:11||1|pos:|||left:||w:2]',
+				true,
+			],
+
+			'dynamic precision implicit' => [
+				'%.*f',
+				'[f=.*f:1|||pos:|||left:||p:0]',
+				true,
+			],
+
+			'dynamic width and precision implicit' => [
+				'%*.*f',
+				'[f=*.*f:1|||pos:|||left:||w:0|p:0]',
+				true,
+			],
+
+			'dynamic width positional' => [
+				'%2$*3$s',
+				'[s=2$*3$s:1||2|pos:|||left:||w:3]',
+				true,
+			],
+
+			'dynamic precision positional' => [
+				'%2$.*3$f',
+				'[f=2$.*3$f:1||2|pos:|||left:||p:3]',
+				true,
+			],
+
+			'dynamic width and precision positional' => [
+				'%2$*3$.*4$f',
+				'[f=2$*3$.*4$f:1||2|pos:|||left:||w:3|p:4]',
+				true,
+			],
 		];
 	}
 
@@ -179,6 +224,69 @@ class ParserTest extends TestCase {
 				[ [ ArgumentLexeme::ARG_TYPE_INT ], ' ', [ ArgumentLexeme::ARG_TYPE_STRING ], ' ', [ ArgumentLexeme::ARG_TYPE_MISSING ] ],
 				[ 1 => ArgumentLexeme::ARG_TYPE_INT, ArgumentLexeme::ARG_TYPE_STRING, ArgumentLexeme::ARG_TYPE_MISSING ],
 				true,
+			],
+			'gaps in required indexes' => [
+				'%1$s %5$d',
+				[ [ArgumentLexeme::ARG_TYPE_STRING], ' ', [ArgumentLexeme::ARG_TYPE_INT] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_STRING, 5 => ArgumentLexeme::ARG_TYPE_INT ],
+				false,
+			],
+			'dynamic width implicit' => [
+				'%*s',
+				[ [ ArgumentLexeme::ARG_TYPE_STRING ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_INT, 2 => ArgumentLexeme::ARG_TYPE_STRING ],
+				false,
+			],
+			'dynamic precision implicit' => [
+				'%.*f',
+				[ [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_INT, 2 => ArgumentLexeme::ARG_TYPE_DOUBLE ],
+				false,
+			],
+			'dynamic width and precision implicit' => [
+				'%*.*f',
+				[ [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_INT, 2 => ArgumentLexeme::ARG_TYPE_INT, 3 => ArgumentLexeme::ARG_TYPE_DOUBLE ],
+				false,
+			],
+			'dynamic width positional' => [
+				'%2$*3$s',
+				[ [ ArgumentLexeme::ARG_TYPE_STRING ] ],
+				[ 2 => ArgumentLexeme::ARG_TYPE_STRING, 3 => ArgumentLexeme::ARG_TYPE_INT ],
+				false,
+			],
+			'dynamic precision positional' => [
+				'%2$.*3$f',
+				[ [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
+				[ 2 => ArgumentLexeme::ARG_TYPE_DOUBLE, 3 => ArgumentLexeme::ARG_TYPE_INT ],
+				false,
+			],
+			'dynamic width and precision positional' => [
+				'%2$*3$.*4$f',
+				[ [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
+				[ 2 => ArgumentLexeme::ARG_TYPE_DOUBLE, 3 => ArgumentLexeme::ARG_TYPE_INT, 4 => ArgumentLexeme::ARG_TYPE_INT ],
+				false,
+			],
+
+			// These just ingrain the current behavior of the parser to avoid breaking compatibility. In a major release
+			// these should be changed such that an index could contain more than a single type, gross as that is
+			'overlapping types - last type wins 1' => [
+				'%1$s %1$d',
+				[ [ArgumentLexeme::ARG_TYPE_STRING], ' ', [ArgumentLexeme::ARG_TYPE_INT] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_INT ],
+				false,
+			],
+			'overlapping types - last type wins 2' => [
+				'%1$d %1$s',
+				[ [ArgumentLexeme::ARG_TYPE_INT], ' ', [ArgumentLexeme::ARG_TYPE_STRING] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_STRING ],
+				false,
+			],
+			'overlapping types - multiple overwrites' => [
+				'%*s %2$*1$f %1$*2$f',
+				[ [ArgumentLexeme::ARG_TYPE_STRING], ' ', [ ArgumentLexeme::ARG_TYPE_DOUBLE ], ' ', [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_DOUBLE, ArgumentLexeme::ARG_TYPE_INT ],
+				false,
 			],
 		];
 	}

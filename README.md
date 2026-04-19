@@ -235,6 +235,10 @@ Available since PHP 5.0.3. */
 	public const T_FLOAT_AUTO_SCI = 'g';
 	/** @var string shorter of %E and %F. */
 	public const T_FLOAT_AUTO_SCI_CAP = 'G';
+	/** @var string shorter of %e and %f, but uses decimal dot rather than locale-specific decimal separator. */
+	public const T_FLOAT_AUTO_SCI_DECIMAL_DOT = 'h';
+	/** @var string shorter of %E and %F, but uses decimal dot rather than locale-specific decimal separator. */
+	public const T_FLOAT_AUTO_SCI_DECIMAL_DOT_CAP = 'H';
 	/** @var string the argument is treated as an integer and presented as an octal number. */
 	public const T_INT_AS_OCTAL = 'o';
 	/** @var string the argument is treated as and presented as a string. */
@@ -245,17 +249,19 @@ Available since PHP 5.0.3. */
 	public const T_INT_HEX = 'x';
 	/** @var string the argument is treated as an integer and presented as a hexadecimal number (with uppercase letters). */
 	public const T_INT_HEX_CAP = 'X';
-	public const VALID_T_TYPES = [self::T_INT_AS_BINARY, self::T_INT_AS_CHARACTER, self::T_INT, self::T_DOUBLE_AS_SCI, self::T_DOUBLE_AS_SCI_CAP, self::T_FLOAT_LOCALE, self::T_FLOAT_NO_LOCALE, self::T_FLOAT_AUTO_SCI, self::T_FLOAT_AUTO_SCI_CAP, self::T_INT_AS_OCTAL, self::T_STRING, self::T_INT_UNSIGNED, self::T_INT_HEX, self::T_INT_HEX_CAP];
+	public const VALID_T_TYPES = [self::T_INT_AS_BINARY, self::T_INT_AS_CHARACTER, self::T_INT, self::T_DOUBLE_AS_SCI, self::T_DOUBLE_AS_SCI_CAP, self::T_FLOAT_LOCALE, self::T_FLOAT_NO_LOCALE, self::T_FLOAT_AUTO_SCI, self::T_FLOAT_AUTO_SCI_CAP, self::T_FLOAT_AUTO_SCI_DECIMAL_DOT, self::T_FLOAT_AUTO_SCI_DECIMAL_DOT_CAP, self::T_INT_AS_OCTAL, self::T_STRING, self::T_INT_UNSIGNED, self::T_INT_HEX, self::T_INT_HEX_CAP];
 	public const ARG_TYPE_MISSING = '';
 	public const ARG_TYPE_INT = 'int';
 	public const ARG_TYPE_DOUBLE = 'float';
 	public const ARG_TYPE_STRING = 'string';
+	/** @var int magic number indicating a dynamic width/precision argument with an implicit (positional) argument index */
+	public const ARG_INDEX_IMPLICIT = 0;
 	/** @var string[] string    s */
 	public const STRING_TYPES = [self::T_STRING];
 	/** @var string[] integer    d, u, c, o, x, X, b */
 	public const INTEGER_TYPES = [self::T_INT, self::T_INT_UNSIGNED, self::T_INT_AS_CHARACTER, self::T_INT_AS_OCTAL, self::T_INT_HEX, self::T_INT_HEX_CAP, self::T_INT_AS_BINARY];
-	/** @var string[] double    g, G, e, E, f, F */
-	public const DOUBLE_TYPES = [self::T_FLOAT_AUTO_SCI, self::T_FLOAT_AUTO_SCI_CAP, self::T_DOUBLE_AS_SCI, self::T_DOUBLE_AS_SCI_CAP, self::T_FLOAT_LOCALE, self::T_FLOAT_NO_LOCALE];
+	/** @var string[] double    g, G, h, H, e, E, f, F */
+	public const DOUBLE_TYPES = [self::T_FLOAT_AUTO_SCI, self::T_FLOAT_AUTO_SCI_CAP, self::T_FLOAT_AUTO_SCI_DECIMAL_DOT, self::T_FLOAT_AUTO_SCI_DECIMAL_DOT_CAP, self::T_DOUBLE_AS_SCI, self::T_DOUBLE_AS_SCI_CAP, self::T_FLOAT_LOCALE, self::T_FLOAT_NO_LOCALE];
 	public const T_INVALID = '';
 	public const T_LITERAL_STRING = '!';
 }
@@ -264,7 +270,7 @@ Available since PHP 5.0.3. */
 #### Method: ArgumentLexeme->__construct
 
 ```php
-function __construct(string $lexItemType, string $val, int $pos, ?int $arg, bool $showPositive, ?string $padChar, ?int $padWidth, bool $leftJustified, ?int $precision)
+function __construct(string $lexItemType, string $val, int $pos, ?int $arg, bool $showPositive, ?string $padChar, ?int $padWidth, bool $leftJustified, ?int $precision [, ?int $widthArgumentIndex = null [, ?int $precisionArgumentIndex = null]])
 ```
 
 ArgumentLexeme constructor.
@@ -346,6 +352,40 @@ The Lexeme's indicated precision.
 ##### Returns:
 
 - ***int*** | ***null*** - null on unspecified
+
+---
+
+#### Method: ArgumentLexeme->getWidthArgumentIndex
+
+```php
+function getWidthArgumentIndex() : ?int
+```
+
+The argument index supplying a dynamic width, or null if width is static.  
+  
+Returns ARG_INDEX_IMPLICIT (0) when the width argument is taken from the implicit argument list,  
+or an explicit 1-based index when written as `*N$`.
+
+##### Returns:
+
+- ***int*** | ***null*** - null when width is not dynamic
+
+---
+
+#### Method: ArgumentLexeme->getPrecisionArgumentIndex
+
+```php
+function getPrecisionArgumentIndex() : ?int
+```
+
+The argument index supplying a dynamic precision, or null if precision is static.  
+  
+Returns ARG_INDEX_IMPLICIT (0) when the precision argument is taken from the implicit argument list,  
+or an explicit 1-based index when written as `.*N$`.
+
+##### Returns:
+
+- ***int*** | ***null*** - null when precision is not dynamic
 
 ---
 
