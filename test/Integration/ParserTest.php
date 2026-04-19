@@ -7,6 +7,7 @@ use donatj\Printf\Emitter;
 use donatj\Printf\Lexeme;
 use donatj\Printf\LexemeEmitter;
 use donatj\Printf\Parser;
+use donatj\Printf\Printer;
 use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase {
@@ -76,6 +77,18 @@ class ParserTest extends TestCase {
 			'test positional arguments' => [
 				'%g %2$s-%1$f %u',
 				'[g=g:1|||pos:|||left:|][!= :2][s=2$s:4||2|pos:|||left:|][!=-:7][f=1$f:9||1|pos:|||left:|][!= :12][u=u:14|||pos:|||left:|]',
+				true,
+			],
+
+			'test %h lowercase decimal dot' => [
+				'%h',
+				'[h=h:1|||pos:|||left:|]',
+				true,
+			],
+
+			'test %H uppercase decimal dot' => [
+				'%H',
+				'[H=H:1|||pos:|||left:|]',
 				true,
 			],
 
