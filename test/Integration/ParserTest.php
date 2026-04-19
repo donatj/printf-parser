@@ -122,9 +122,9 @@ class ParserTest extends TestCase {
 				"%'x-+10d",
 			],
 
-			'dynamic width implicit' => [
-				'%*s',
-				'[s=*s:1|||pos:|||left:||w:0]',
+			'dynamic width' => [
+				'%*s %*3$s %1$*2$s',
+				'[s=*s:1|||pos:|||left:||w:0][!= :3][s=*3$s:5|||pos:|||left:||w:3][!= :9][s=1$*2$s:11||1|pos:|||left:||w:2]',
 				true,
 			],
 
