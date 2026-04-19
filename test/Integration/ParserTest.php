@@ -225,38 +225,37 @@ class ParserTest extends TestCase {
 				[ 1 => ArgumentLexeme::ARG_TYPE_INT, ArgumentLexeme::ARG_TYPE_STRING, ArgumentLexeme::ARG_TYPE_MISSING ],
 				true,
 			],
-			// Dynamic width/precision
-			[
+			'dynamic width implicit' => [
 				'%*s',
 				[ [ ArgumentLexeme::ARG_TYPE_STRING ] ],
 				[ 1 => ArgumentLexeme::ARG_TYPE_INT, 2 => ArgumentLexeme::ARG_TYPE_STRING ],
 				false,
 			],
-			[
+			'dynamic precision implicit' => [
 				'%.*f',
 				[ [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
 				[ 1 => ArgumentLexeme::ARG_TYPE_INT, 2 => ArgumentLexeme::ARG_TYPE_DOUBLE ],
 				false,
 			],
-			[
+			'dynamic width and precision implicit' => [
 				'%*.*f',
 				[ [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
 				[ 1 => ArgumentLexeme::ARG_TYPE_INT, 2 => ArgumentLexeme::ARG_TYPE_INT, 3 => ArgumentLexeme::ARG_TYPE_DOUBLE ],
 				false,
 			],
-			[
+			'dynamic width positional' => [
 				'%2$*3$s',
 				[ [ ArgumentLexeme::ARG_TYPE_STRING ] ],
 				[ 2 => ArgumentLexeme::ARG_TYPE_STRING, 3 => ArgumentLexeme::ARG_TYPE_INT ],
 				false,
 			],
-			[
+			'dynamic precision positional' => [
 				'%2$.*3$f',
 				[ [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
 				[ 2 => ArgumentLexeme::ARG_TYPE_DOUBLE, 3 => ArgumentLexeme::ARG_TYPE_INT ],
 				false,
 			],
-			[
+			'dynamic width and precision positional' => [
 				'%2$*3$.*4$f',
 				[ [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
 				[ 2 => ArgumentLexeme::ARG_TYPE_DOUBLE, 3 => ArgumentLexeme::ARG_TYPE_INT, 4 => ArgumentLexeme::ARG_TYPE_INT ],
