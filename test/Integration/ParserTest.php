@@ -7,6 +7,7 @@ use donatj\Printf\Emitter;
 use donatj\Printf\Lexeme;
 use donatj\Printf\LexemeEmitter;
 use donatj\Printf\Parser;
+use donatj\Printf\Printer;
 use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase {
