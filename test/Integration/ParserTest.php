@@ -157,6 +157,18 @@ class ParserTest extends TestCase {
 				'[f=2$*3$.*4$f:1||2|pos:|||left:||w:3|p:4]',
 				true,
 			],
+
+			'dynamic width zero positional index rejected' => [
+				'%*0$s',
+				'[=*0:1|||pos:|||left:||w:0][!=$s:3]',
+				false,
+			],
+
+			'dynamic precision zero positional index rejected' => [
+				'%.*0$f',
+				'[=.*0:1|||pos:|||left:||p:0][!=$f:4]',
+				false,
+			],
 		];
 	}
 

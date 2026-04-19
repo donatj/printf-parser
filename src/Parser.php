@@ -225,6 +225,10 @@ class Parser {
 
 			$ch = $str[$size - 1];
 			if( ctype_digit($ch) ) {
+				if( $buf === '' && $ch === '0' ) {
+					return null; // reject leading zero — positional indices are 1-based only
+				}
+
 				$buf .= $ch;
 
 				continue;
