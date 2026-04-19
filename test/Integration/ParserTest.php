@@ -79,6 +79,18 @@ class ParserTest extends TestCase {
 				true,
 			],
 
+			'test %h lowercase decimal dot' => [
+				'%h',
+				'[h=h:1|||pos:|||left:|]',
+				true,
+			],
+
+			'test %H uppercase decimal dot' => [
+				'%H',
+				'[H=H:1|||pos:|||left:|]',
+				true,
+			],
+
 			'invalid string handling' => [
 				'100%',
 				'[!=100:0][=:4|||pos:|||left:|]',

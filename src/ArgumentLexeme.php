@@ -29,6 +29,10 @@ class ArgumentLexeme extends Lexeme {
 	public const T_FLOAT_AUTO_SCI = 'g';
 	/** @var string shorter of %E and %F. */
 	public const T_FLOAT_AUTO_SCI_CAP = 'G';
+	/** @var string shorter of %e and %f, but uses decimal dot rather than locale-specific decimal separator. */
+	public const T_FLOAT_AUTO_SCI_DECIMAL_DOT = 'h';
+	/** @var string shorter of %E and %F, but uses decimal dot rather than locale-specific decimal separator. */
+	public const T_FLOAT_AUTO_SCI_DECIMAL_DOT_CAP = 'H';
 	/** @var string the argument is treated as an integer and presented as an octal number. */
 	public const T_INT_AS_OCTAL = 'o';
 	/** @var string the argument is treated as and presented as a string. */
@@ -50,6 +54,8 @@ class ArgumentLexeme extends Lexeme {
 		self::T_FLOAT_NO_LOCALE,
 		self::T_FLOAT_AUTO_SCI,
 		self::T_FLOAT_AUTO_SCI_CAP,
+		self::T_FLOAT_AUTO_SCI_DECIMAL_DOT,
+		self::T_FLOAT_AUTO_SCI_DECIMAL_DOT_CAP,
 		self::T_INT_AS_OCTAL,
 		self::T_STRING,
 		self::T_INT_UNSIGNED,
@@ -73,9 +79,10 @@ class ArgumentLexeme extends Lexeme {
 		self::T_INT_AS_BINARY,
 	];
 
-	/** @var string[] double    g, G, e, E, f, F */
+	/** @var string[] double    g, G, h, H, e, E, f, F */
 	public const DOUBLE_TYPES = [
 		self::T_FLOAT_AUTO_SCI, self::T_FLOAT_AUTO_SCI_CAP,
+		self::T_FLOAT_AUTO_SCI_DECIMAL_DOT, self::T_FLOAT_AUTO_SCI_DECIMAL_DOT_CAP,
 		self::T_DOUBLE_AS_SCI, self::T_DOUBLE_AS_SCI_CAP,
 		self::T_FLOAT_LOCALE, self::T_FLOAT_NO_LOCALE,
 	];
