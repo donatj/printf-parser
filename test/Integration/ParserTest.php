@@ -225,6 +225,11 @@ class ParserTest extends TestCase {
 				[ 1 => ArgumentLexeme::ARG_TYPE_INT, ArgumentLexeme::ARG_TYPE_STRING, ArgumentLexeme::ARG_TYPE_MISSING ],
 				true,
 			],
+			'gaps in required indexes' => [
+				'%1$s %5$d',
+				[ [ArgumentLexeme::ARG_TYPE_STRING], ' ', [ArgumentLexeme::ARG_TYPE_INT] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_STRING, 5 => ArgumentLexeme::ARG_TYPE_INT ],
+			],
 			'dynamic width implicit' => [
 				'%*s',
 				[ [ ArgumentLexeme::ARG_TYPE_STRING ] ],
@@ -260,6 +265,24 @@ class ParserTest extends TestCase {
 				[ [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
 				[ 2 => ArgumentLexeme::ARG_TYPE_DOUBLE, 3 => ArgumentLexeme::ARG_TYPE_INT, 4 => ArgumentLexeme::ARG_TYPE_INT ],
 				false,
+			],
+
+			// These just ingrain the current behavior of the parser to avoid breaking compatibility. In a major release
+			// these should be changed such that an index could contain more than a single type, gross as that is
+			'overlapping types - last type wins 1' => [
+				'%1$s %1$d',
+				[ [ArgumentLexeme::ARG_TYPE_STRING], ' ', [ArgumentLexeme::ARG_TYPE_INT] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_INT ],
+			],
+			'overlapping types - last type wins 2' => [
+				'%1$d %1$s',
+				[ [ArgumentLexeme::ARG_TYPE_INT], ' ', [ArgumentLexeme::ARG_TYPE_STRING] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_STRING ],
+			],
+			'overlapping types - multiple overwrites' => [
+				'%*s %2$*1$f %1$*2$f',
+				[ [ArgumentLexeme::ARG_TYPE_STRING], ' ', [ ArgumentLexeme::ARG_TYPE_DOUBLE ], ' ', [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_DOUBLE, ArgumentLexeme::ARG_TYPE_INT ],
 			],
 		];
 	}
