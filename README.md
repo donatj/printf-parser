@@ -8,9 +8,13 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/donatj/printf-parser/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/donatj/printf-parser)
 
 
-PHP printf-syntax compatible printf string parser.
+Parse printf format strings. Receive a stream of lexemes.
 
-Parses printf strings into a stream of lexemes.
+Literal text produces a literal lexeme. A format specifier produces an argument lexeme. Each argument lexeme exposes its type: integer, float, string.
+
+Width is accessible on the argument lexeme. Precision is accessible on the argument lexeme. Width may be static. Width may be drawn from an argument position. Precision may be static. Precision may be drawn from an argument position.
+
+The argument lexeme also exposes position specifier, padding character, padding width, alignment flag, sign flag.
 
 
 ## Requirements
@@ -37,7 +41,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $emitter = new \donatj\Printf\LexemeEmitter;
 $parser  = new \donatj\Printf\Parser($emitter);
 
-$parser->parseStr('percent of %s: %d%%');
+$parser->parseStr('name: %s, score: %10.2f, rank: %1$d');
 
 $lexemes = $emitter->getLexemes();
 
@@ -46,7 +50,21 @@ foreach( $lexemes as $lexeme ) {
 	echo var_export($lexeme->getVal(), true);
 
 	if( $lexeme instanceof \donatj\Printf\ArgumentLexeme ) {
-		echo ' arg type: ' . $lexeme->argType();
+		echo ' [type: ' . $lexeme->argType();
+
+		if( $lexeme->getPadWidth() !== null ) {
+			echo ', width: ' . $lexeme->getPadWidth();
+		}
+
+		if( $lexeme->getPrecision() !== null ) {
+			echo ', precision: ' . $lexeme->getPrecision();
+		}
+
+		if( $lexeme->getArg() !== null ) {
+			echo ', position: ' . $lexeme->getArg();
+		}
+
+		echo ']';
 	}
 
 	echo PHP_EOL;
@@ -57,16 +75,17 @@ foreach( $lexemes as $lexeme ) {
 Output:
 
 ```
-! -> 'percent of '
-s -> 's' arg type: string
-! -> ': '
-d -> 'd' arg type: int
-! -> '%'
+! -> 'name: '
+s -> 's' [type: string]
+! -> ', score: '
+f -> '10.2f' [type: float, width: 10, precision: 2]
+! -> ', rank: '
+d -> '1$d' [type: int, position: 1]
 ```
 
 ## Documentation
 
-### Class: donatj\Printf\Parser
+### Class: \donatj\Printf\Parser
 
 Parser implements a PHP Printf compatible Printf string parser.
 
@@ -92,7 +111,7 @@ function parseStr(string $string) : void
 
 Parses a printf string and emit parsed lexemes to the configured Emitter
 
-### Class: donatj\Printf\LexemeEmitter
+### Class: \donatj\Printf\LexemeEmitter
 
 ---
 
@@ -104,7 +123,7 @@ function getLexemes() : \donatj\Printf\LexemeCollection
 
 Return the Lexemes received by the emitter as an immutable LexemeCollection
 
-### Class: donatj\Printf\LexemeCollection
+### Class: \donatj\Printf\LexemeCollection
 
 LexemeCollection is an immutable iterable collection of Lexemes with ArrayAccess
 
@@ -155,7 +174,7 @@ ArgumentLexeme::ARG_TYPE_STRING
 
 - ***string[]***
 
-### Class: donatj\Printf\Lexeme
+### Class: \donatj\Printf\Lexeme
 
 Lexeme represents a "basic" component of a printf string - either Literal Strings "!" or Invalid Lexemes
 
@@ -207,7 +226,7 @@ function getPos() : int
 
 The string position of the given lexeme
 
-### Class: donatj\Printf\ArgumentLexeme
+### Class: \donatj\Printf\ArgumentLexeme
 
 ```php
 <?php

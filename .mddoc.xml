@@ -10,9 +10,13 @@
 			<badge-scrutinizer name="donatj/printf-parser" type="quality"/>
 			<badge-scrutinizer name="donatj/printf-parser" type="coverage"/>
 			<text><![CDATA[
-PHP printf-syntax compatible printf string parser.
+Parse printf format strings. Receive a stream of lexemes.
 
-Parses printf strings into a stream of lexemes.
+Literal text produces a literal lexeme. A format specifier produces an argument lexeme. Each argument lexeme exposes its type: integer, float, string.
+
+Width is accessible on the argument lexeme. Precision is accessible on the argument lexeme. Width may be static. Width may be drawn from an argument position. Precision may be static. Precision may be drawn from an argument position.
+
+The argument lexeme also exposes position specifier, padding character, padding width, alignment flag, sign flag.
 ]]></text>
 			<section title="Requirements">
 				<composer-requires/>
