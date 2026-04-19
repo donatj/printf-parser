@@ -128,6 +128,12 @@ class ParserTest extends TestCase {
 				true,
 			],
 
+			'dynamic precision' => [
+				'%.*f %.*3$f %1$.*2$f',
+				'[f=.*f:1|||pos:|||left:||p:0][!= :4][f=.*3$f:6|||pos:|||left:||p:3][!= :11][f=1$.*2$f:13||1|pos:|||left:||p:2]',
+				true,
+			],
+
 			'dynamic precision implicit' => [
 				'%.*f',
 				'[f=.*f:1|||pos:|||left:||p:0]',
@@ -272,6 +278,18 @@ class ParserTest extends TestCase {
 				'%2$.*3$f',
 				[ [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
 				[ 2 => ArgumentLexeme::ARG_TYPE_DOUBLE, 3 => ArgumentLexeme::ARG_TYPE_INT ],
+				true,
+			],
+			'dynamic width positional index, implicit arg' => [
+				'%*3$s',
+				[ [ ArgumentLexeme::ARG_TYPE_STRING ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_STRING, 3 => ArgumentLexeme::ARG_TYPE_INT ],
+				true,
+			],
+			'dynamic precision positional index, implicit arg' => [
+				'%.*3$f',
+				[ [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_DOUBLE, 3 => ArgumentLexeme::ARG_TYPE_INT ],
 				true,
 			],
 			'dynamic width and precision positional' => [
