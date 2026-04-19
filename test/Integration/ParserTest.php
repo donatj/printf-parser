@@ -229,6 +229,7 @@ class ParserTest extends TestCase {
 				'%1$s %5$d',
 				[ [ArgumentLexeme::ARG_TYPE_STRING], ' ', [ArgumentLexeme::ARG_TYPE_INT] ],
 				[ 1 => ArgumentLexeme::ARG_TYPE_STRING, 5 => ArgumentLexeme::ARG_TYPE_INT ],
+				false,
 			],
 			'dynamic width implicit' => [
 				'%*s',
@@ -273,16 +274,19 @@ class ParserTest extends TestCase {
 				'%1$s %1$d',
 				[ [ArgumentLexeme::ARG_TYPE_STRING], ' ', [ArgumentLexeme::ARG_TYPE_INT] ],
 				[ 1 => ArgumentLexeme::ARG_TYPE_INT ],
+				false,
 			],
 			'overlapping types - last type wins 2' => [
 				'%1$d %1$s',
 				[ [ArgumentLexeme::ARG_TYPE_INT], ' ', [ArgumentLexeme::ARG_TYPE_STRING] ],
 				[ 1 => ArgumentLexeme::ARG_TYPE_STRING ],
+				false,
 			],
 			'overlapping types - multiple overwrites' => [
 				'%*s %2$*1$f %1$*2$f',
 				[ [ArgumentLexeme::ARG_TYPE_STRING], ' ', [ ArgumentLexeme::ARG_TYPE_DOUBLE ], ' ', [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
 				[ 1 => ArgumentLexeme::ARG_TYPE_DOUBLE, ArgumentLexeme::ARG_TYPE_INT ],
+				false,
 			],
 		];
 	}
