@@ -141,7 +141,7 @@ class Parser {
 		if( $next->getString() === '*' ) {
 			// Dynamic width — optional positional form *N$
 			$int                = $this->eatIntDollar($lexer);
-			$widthArgumentIndex = $int !== null ? $int : ArgumentLexeme::ARG_IMPLICIT;
+			$widthArgumentIndex = $int ?? ArgumentLexeme::ARG_IMPLICIT;
 
 			$next = $lexer->next();
 		} elseif( ctype_digit($next->getString()) ) {
@@ -155,7 +155,7 @@ class Parser {
 				// Dynamic precision — optional positional form .*N$
 				$lexer->next(); // consume *
 				$int                    = $this->eatIntDollar($lexer);
-				$precisionArgumentIndex = $int !== null ? $int : ArgumentLexeme::ARG_IMPLICIT;
+				$precisionArgumentIndex = $int ?? ArgumentLexeme::ARG_IMPLICIT;
 			} elseif( ctype_digit($lexer->peek()->getString()) ) {
 				$precision = $this->eatInt($lexer);
 			}
