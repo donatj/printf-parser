@@ -28,6 +28,7 @@ Parses printf strings into a stream of lexemes.
 			</section>
 			<section title="Documentation">
 				<file name="src/Parser.php"/>
+				<file name="src/Printer.php"/>
 				<file name="src/LexemeEmitter.php"/>
 				<file name="src/LexemeCollection.php"/>
 				<file name="src/Lexeme.php"/>

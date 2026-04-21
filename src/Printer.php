@@ -8,7 +8,10 @@ namespace donatj\Printf;
 class Printer {
 
 	/**
+	 * Builds a canonical printf-format string from lexemes
+	 *
 	 * @param iterable<Lexeme> $lexemes This can be a LexemeCollection
+	 * @throws \RuntimeException if an invalid or unrecognized lexeme is encountered
 	 */
 	public function print( iterable $lexemes ) : string {
 		$out = '';

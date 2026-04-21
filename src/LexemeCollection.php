@@ -87,7 +87,7 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	}
 
 	/**
-	 * Returns the list of expected arguments a 1-indexed map of the following:
+	 * Returns the list of expected arguments as a 1-indexed map of the following:
 	 *
 	 * ```
 	 * ArgumentLexeme::ARG_TYPE_MISSING

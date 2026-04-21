@@ -92,6 +92,24 @@ function parseStr(string $string) : void
 
 Parses a printf string and emit parsed lexemes to the configured Emitter
 
+### Class: donatj\Printf\Printer
+
+Printer takes an iterable of Lexemes and produces a printf string.
+
+#### Method: Printer->print
+
+```php
+function print(iterable $lexemes) : string
+```
+
+Builds a canonical printf-format string from lexemes
+
+##### Parameters:
+
+- ***iterable<\donatj\Printf\Lexeme>*** `$lexemes` - This can be a LexemeCollection
+
+**Throws**: `\RuntimeException` - if an invalid or unrecognized lexeme is encountered
+
 ### Class: donatj\Printf\LexemeEmitter
 
 ---
@@ -142,7 +160,7 @@ Get the LexemeCollection as an ordered array of Lexemes
 function argTypes() : array
 ```
 
-##### Returns the list of expected arguments a 1-indexed map of the following
+##### Returns the list of expected arguments as a 1-indexed map of the following
 
 ```  
 ArgumentLexeme::ARG_TYPE_MISSING  
