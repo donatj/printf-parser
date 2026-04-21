@@ -98,6 +98,7 @@ class ArgumentLexeme extends Lexeme {
 	private ?int $precision;
 	private ?int $widthArgumentIndex;
 	private ?int $precisionArgumentIndex;
+	private bool $longModifier;
 
 	/**
 	 * ArgumentLexeme constructor.
@@ -105,7 +106,7 @@ class ArgumentLexeme extends Lexeme {
 	public function __construct(
 		string $lexItemType, string $val, int $pos,
 		?int $arg, bool $showPositive, ?string $padChar, ?int $padWidth, bool $leftJustified, ?int $precision,
-		?int $widthArgumentIndex = null, ?int $precisionArgumentIndex = null
+		?int $widthArgumentIndex = null, ?int $precisionArgumentIndex = null, bool $longModifier = false
 	) {
 		parent::__construct($lexItemType, $val, $pos);
 
@@ -117,6 +118,7 @@ class ArgumentLexeme extends Lexeme {
 		$this->precision              = $precision;
 		$this->widthArgumentIndex     = $widthArgumentIndex;
 		$this->precisionArgumentIndex = $precisionArgumentIndex;
+		$this->longModifier           = $longModifier;
 	}
 
 	/**
@@ -190,6 +192,15 @@ class ArgumentLexeme extends Lexeme {
 	 */
 	public function getPrecisionArgumentIndex() : ?int {
 		return $this->precisionArgumentIndex;
+	}
+
+	/**
+	 * Is the `l` (long) length modifier present?
+	 *
+	 * PHP parses but ignores this modifier; it is preserved here for round-trip fidelity.
+	 */
+	public function getLongModifier() : bool {
+		return $this->longModifier;
 	}
 
 	/**
