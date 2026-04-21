@@ -37,6 +37,10 @@ class ParserTest extends TestCase {
 						$s .= "|p:{$lexItem->getPrecisionArgumentIndex()}";
 					}
 
+					if( $lexItem->getLongModifier() ) {
+						$s .= '|long:1';
+					}
+
 					$this->serialized .= $s . ']';
 				} else {
 					$this->serialized .= "[{$lexItem->getLexItemType()}={$lexItem->getVal()}:{$lexItem->getPos()}]";
@@ -173,6 +177,60 @@ class ParserTest extends TestCase {
 			'dynamic precision zero positional index rejected' => [
 				'%.*0$f',
 				'[=.*0:1|||pos:|||left:||p:0][!=$f:4]',
+				false,
+			],
+
+			'long modifier with integer' => [
+				'%ld',
+				'[d=ld:1|||pos:|||left:||long:1]',
+				true,
+			],
+
+			'long modifier with string' => [
+				'%ls',
+				'[s=ls:1|||pos:|||left:||long:1]',
+				true,
+			],
+
+			'long modifier with float' => [
+				'%lf',
+				'[f=lf:1|||pos:|||left:||long:1]',
+				true,
+			],
+
+			'long modifier with width' => [
+				'%10lf',
+				'[f=10lf:1|||pos:||10|left:||long:1]',
+				true,
+			],
+
+			'long modifier with precision' => [
+				'%.5lf',
+				'[f=.5lf:1|||pos:|||left:|5|long:1]',
+				true,
+			],
+
+			'long modifier with width and precision' => [
+				'%10.5lf',
+				'[f=10.5lf:1|||pos:||10|left:|5|long:1]',
+				true,
+			],
+
+			'long modifier with positional arg' => [
+				'%1$ld',
+				'[d=1$ld:1||1|pos:|||left:||long:1]',
+				true,
+			],
+
+			'long modifier with left-justify and width' => [
+				'%-10ld',
+				'[d=-10ld:1|||pos:||10|left:1||long:1]',
+				true,
+			],
+
+			'double l before type specifier parses first l as long modifier leaving second l as invalid type' => [
+				'%lls',
+				'[=ll:1|||pos:|||left:||long:1][!=s:3]',
 				false,
 			],
 		];

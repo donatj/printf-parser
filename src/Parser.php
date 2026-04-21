@@ -86,6 +86,7 @@ class Parser {
 		$precision              = null;
 		$widthArgumentIndex     = null;
 		$precisionArgumentIndex = null;
+		$longModifier           = false;
 
 		if( $next->getString() !== '0' && ctype_digit($next->getString()) ) {
 			$lexer->rewind();
@@ -163,6 +164,11 @@ class Parser {
 			$next = $lexer->next();
 		}
 
+		if( $next->getString() === 'l' ) {
+			$longModifier = true;
+			$next         = $lexer->next();
+		}
+
 		$tType = Lexeme::T_INVALID;
 		if( in_array($next->getString(), ArgumentLexeme::VALID_T_TYPES, true) ) {
 			$tType = $next->getString();
@@ -182,7 +188,8 @@ class Parser {
 				$leftJustified,
 				$precision,
 				$widthArgumentIndex,
-				$precisionArgumentIndex
+				$precisionArgumentIndex,
+				$longModifier
 			)
 		);
 	}

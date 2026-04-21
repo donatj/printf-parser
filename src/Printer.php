@@ -67,6 +67,7 @@ class Printer {
 				$out .= $lexeme->getPrecision() !== null ? '.' . $lexeme->getPrecision() : '';
 			}
 
+			$out .= $lexeme->getLongModifier() ? 'l' : '';
 			$out .= $type;
 		}
 
