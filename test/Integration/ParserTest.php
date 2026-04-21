@@ -38,7 +38,7 @@ class ParserTest extends TestCase {
 					}
 
 					if( $lexItem->getLongModifier() ) {
-						$s .= '|long:1';
+						$s .= '|l';
 					}
 
 					$this->serialized .= $s . ']';
@@ -182,55 +182,55 @@ class ParserTest extends TestCase {
 
 			'long modifier with integer' => [
 				'%ld',
-				'[d=ld:1|||pos:|||left:||long:1]',
+				'[d=ld:1|||pos:|||left:||l]',
 				true,
 			],
 
 			'long modifier with string' => [
 				'%ls',
-				'[s=ls:1|||pos:|||left:||long:1]',
+				'[s=ls:1|||pos:|||left:||l]',
 				true,
 			],
 
 			'long modifier with float' => [
 				'%lf',
-				'[f=lf:1|||pos:|||left:||long:1]',
+				'[f=lf:1|||pos:|||left:||l]',
 				true,
 			],
 
 			'long modifier with width' => [
 				'%10lf',
-				'[f=10lf:1|||pos:||10|left:||long:1]',
+				'[f=10lf:1|||pos:||10|left:||l]',
 				true,
 			],
 
 			'long modifier with precision' => [
 				'%.5lf',
-				'[f=.5lf:1|||pos:|||left:|5|long:1]',
+				'[f=.5lf:1|||pos:|||left:|5|l]',
 				true,
 			],
 
 			'long modifier with width and precision' => [
 				'%10.5lf',
-				'[f=10.5lf:1|||pos:||10|left:|5|long:1]',
+				'[f=10.5lf:1|||pos:||10|left:|5|l]',
 				true,
 			],
 
 			'long modifier with positional arg' => [
 				'%1$ld',
-				'[d=1$ld:1||1|pos:|||left:||long:1]',
+				'[d=1$ld:1||1|pos:|||left:||l]',
 				true,
 			],
 
 			'long modifier with left-justify and width' => [
 				'%-10ld',
-				'[d=-10ld:1|||pos:||10|left:1||long:1]',
+				'[d=-10ld:1|||pos:||10|left:1||l]',
 				true,
 			],
 
 			'double l before type specifier parses first l as long modifier leaving second l as invalid type' => [
 				'%lls',
-				'[=ll:1|||pos:|||left:||long:1][!=s:3]',
+				'[=ll:1|||pos:|||left:||l][!=s:3]',
 				false,
 			],
 		];
