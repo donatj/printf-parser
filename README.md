@@ -267,7 +267,9 @@ Available since PHP 5.0.3. */
 	public const T_INT_HEX = 'x';
 	/** @var string the argument is treated as an integer and presented as a hexadecimal number (with uppercase letters). */
 	public const T_INT_HEX_CAP = 'X';
-	public const VALID_T_TYPES = [self::T_INT_AS_BINARY, self::T_INT_AS_CHARACTER, self::T_INT, self::T_DOUBLE_AS_SCI, self::T_DOUBLE_AS_SCI_CAP, self::T_FLOAT_LOCALE, self::T_FLOAT_NO_LOCALE, self::T_FLOAT_AUTO_SCI, self::T_FLOAT_AUTO_SCI_CAP, self::T_FLOAT_AUTO_SCI_DECIMAL_DOT, self::T_FLOAT_AUTO_SCI_DECIMAL_DOT_CAP, self::T_INT_AS_OCTAL, self::T_STRING, self::T_INT_UNSIGNED, self::T_INT_HEX, self::T_INT_HEX_CAP];
+	/** @var string a percent-sign type specifier (e.g. `%4%`). Unlike `%%`, an argument must be supplied even though it is not used. */
+	public const T_PERCENT = '%';
+	public const VALID_T_TYPES = [self::T_INT_AS_BINARY, self::T_INT_AS_CHARACTER, self::T_INT, self::T_DOUBLE_AS_SCI, self::T_DOUBLE_AS_SCI_CAP, self::T_FLOAT_LOCALE, self::T_FLOAT_NO_LOCALE, self::T_FLOAT_AUTO_SCI, self::T_FLOAT_AUTO_SCI_CAP, self::T_FLOAT_AUTO_SCI_DECIMAL_DOT, self::T_FLOAT_AUTO_SCI_DECIMAL_DOT_CAP, self::T_INT_AS_OCTAL, self::T_STRING, self::T_INT_UNSIGNED, self::T_INT_HEX, self::T_INT_HEX_CAP, self::T_PERCENT];
 	public const ARG_TYPE_MISSING = '';
 	public const ARG_TYPE_INT = 'int';
 	public const ARG_TYPE_DOUBLE = 'float';
@@ -288,7 +290,7 @@ Available since PHP 5.0.3. */
 #### Method: ArgumentLexeme->__construct
 
 ```php
-function __construct(string $lexItemType, string $val, int $pos, ?int $arg, bool $showPositive, ?string $padChar, ?int $padWidth, bool $leftJustified, ?int $precision [, ?int $widthArgumentIndex = null [, ?int $precisionArgumentIndex = null]])
+function __construct(string $lexItemType, string $val, int $pos, ?int $arg, bool $showPositive, ?string $padChar, ?int $padWidth, bool $leftJustified, ?int $precision [, ?int $widthArgumentIndex = null [, ?int $precisionArgumentIndex = null [, bool $longModifier = false]]])
 ```
 
 ArgumentLexeme constructor.
@@ -404,6 +406,18 @@ or an explicit 1-based index when written as `.*N$`.
 ##### Returns:
 
 - ***int*** | ***null*** - null when precision is not dynamic
+
+---
+
+#### Method: ArgumentLexeme->getLongModifier
+
+```php
+function getLongModifier() : bool
+```
+
+Is the `l` (long) length modifier present?  
+  
+PHP parses but ignores this modifier; it is preserved here for round-trip fidelity.
 
 ---
 
