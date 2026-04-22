@@ -43,6 +43,8 @@ class ArgumentLexeme extends Lexeme {
 	public const T_INT_HEX = 'x';
 	/** @var string the argument is treated as an integer and presented as a hexadecimal number (with uppercase letters). */
 	public const T_INT_HEX_CAP = 'X';
+	/** @var string a percent-sign type specifier (e.g. `%4%`). Unlike `%%`, an argument must be supplied even though it is not used. */
+	public const T_PERCENT = '%';
 
 	public const VALID_T_TYPES = [
 		self::T_INT_AS_BINARY,
@@ -61,6 +63,7 @@ class ArgumentLexeme extends Lexeme {
 		self::T_INT_UNSIGNED,
 		self::T_INT_HEX,
 		self::T_INT_HEX_CAP,
+		self::T_PERCENT,
 	];
 
 	public const ARG_TYPE_MISSING = '';
