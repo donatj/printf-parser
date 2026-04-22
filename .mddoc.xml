@@ -27,12 +27,14 @@ Parses printf strings into a stream of lexemes.
 				<exec format="code-block" cmd="php ./example/example.php"/>
 			</section>
 			<section title="Documentation">
-				<file name="src/Parser.php"/>
-				<file name="src/Printer.php"/>
-				<file name="src/LexemeEmitter.php"/>
-				<file name="src/LexemeCollection.php"/>
-				<file name="src/Lexeme.php"/>
-				<file name="src/ArgumentLexeme.php"/>
+				<docpage link-text="Full API Documentation" target="DOCS.md" title="Documentation">
+					<file name="src/Parser.php"/>
+					<file name="src/Printer.php"/>
+					<file name="src/LexemeEmitter.php"/>
+					<file name="src/LexemeCollection.php"/>
+					<file name="src/Lexeme.php"/>
+					<file name="src/ArgumentLexeme.php"/>
+				</docpage>
 			</section>
 		</section>
 	</docpage>
