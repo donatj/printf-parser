@@ -233,6 +233,24 @@ class ParserTest extends TestCase {
 				'[=ll:1|||pos:|||left:||l][!=s:3]',
 				false,
 			],
+
+			'percent type with width' => [
+				'%4%',
+				'[%=4%:1|||pos:||4|left:|]',
+				true,
+			],
+
+			'percent type with long modifier' => [
+				'%l%',
+				'[%=l%:1|||pos:|||left:||l]',
+				true,
+			],
+
+			'percent type with flags and precision' => [
+				'%+5.5%',
+				'[%=+5.5%:1|||pos:1||5|left:|5]',
+				true,
+			],
 		];
 	}
 
@@ -375,6 +393,27 @@ class ParserTest extends TestCase {
 				'%*s %2$*1$f %1$*2$f',
 				[ [ArgumentLexeme::ARG_TYPE_STRING], ' ', [ ArgumentLexeme::ARG_TYPE_DOUBLE ], ' ', [ ArgumentLexeme::ARG_TYPE_DOUBLE ] ],
 				[ 1 => ArgumentLexeme::ARG_TYPE_DOUBLE, ArgumentLexeme::ARG_TYPE_INT ],
+				true,
+			],
+
+			'percent type with width consumes one argument' => [
+				'%4%',
+				[ [ ArgumentLexeme::ARG_TYPE_MISSING ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_MISSING ],
+				true,
+			],
+
+			'percent type with long modifier consumes one argument' => [
+				'%l%',
+				[ [ ArgumentLexeme::ARG_TYPE_MISSING ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_MISSING ],
+				true,
+			],
+
+			'percent type with flags and precision consumes one argument' => [
+				'%+5.5%',
+				[ [ ArgumentLexeme::ARG_TYPE_MISSING ] ],
+				[ 1 => ArgumentLexeme::ARG_TYPE_MISSING ],
 				true,
 			],
 		];
