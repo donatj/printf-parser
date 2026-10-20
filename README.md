@@ -5,9 +5,10 @@
 [![License](https://poser.pugx.org/donatj/printf-parser/license)](https://packagist.org/packages/donatj/printf-parser)
 [![ci.yml](https://github.com/donatj/printf-parser/actions/workflows/ci.yml/badge.svg)](https://github.com/donatj/printf-parser/actions/workflows/ci.yml)
 
-PHP printf-syntax compatible printf string parser.
 
-Parses printf strings into a stream of lexemes.
+Parse, validate, and inspect PHP `printf` format strings before using them.
+
+This library splits a format string into literal text and conversion lexemes. It identifies invalid conversions. It reports the type required for each argument. It can produce a canonical format string. Use it to validate user-configured messages, prepare arguments, or build tools that understand PHP's `printf` syntax.
 
 
 ## Requirements

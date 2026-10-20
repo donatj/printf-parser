@@ -10,7 +10,7 @@ function __construct(\donatj\Printf\Emitter $emitter)
 
 Parser constructor.
 
-### Parameters:
+### Parameters
 
 - ***\donatj\Printf\Emitter*** `$emitter` - The given Emitter to emit Lexemes as parsed
 
@@ -19,7 +19,7 @@ Parser constructor.
 ## Method: Parser->parseStr
 
 ```php
-function parseStr(string $string) : void
+function parseStr(string $string): void
 ```
 
 Parses a printf string and emit parsed lexemes to the configured Emitter
@@ -31,12 +31,12 @@ Printer takes an iterable of Lexemes and produces a printf string.
 ## Method: Printer->print
 
 ```php
-function print(iterable $lexemes) : string
+function print(iterable $lexemes): string
 ```
 
 Builds a canonical printf-format string from lexemes
 
-### Parameters:
+### Parameters
 
 - ***iterable<\donatj\Printf\Lexeme>*** `$lexemes` - This can be a LexemeCollection
 
@@ -49,7 +49,7 @@ Builds a canonical printf-format string from lexemes
 ## Method: LexemeEmitter->getLexemes
 
 ```php
-function getLexemes() : \donatj\Printf\LexemeCollection
+function getLexemes(): \donatj\Printf\LexemeCollection
 ```
 
 Return the Lexemes received by the emitter as an immutable LexemeCollection
@@ -63,7 +63,7 @@ LexemeCollection is an immutable iterable collection of Lexemes with ArrayAccess
 ## Method: LexemeCollection->getInvalid
 
 ```php
-function getInvalid() : ?\donatj\Printf\Lexeme
+function getInvalid(): ?\donatj\Printf\Lexeme
 ```
 
 Retrieve the first invalid Lexeme or null if all are valid.  
@@ -75,12 +75,12 @@ This is useful for checking if a printf string parsed without error.
 ## Method: LexemeCollection->toArray
 
 ```php
-function toArray() : array
+function toArray(): array
 ```
 
 Get the LexemeCollection as an ordered array of Lexemes
 
-### Returns:
+### Return Value
 
 - ***\donatj\Printf\Lexeme[]***
 
@@ -89,7 +89,7 @@ Get the LexemeCollection as an ordered array of Lexemes
 ## Method: LexemeCollection->argTypes
 
 ```php
-function argTypes() : array
+function argTypes(): array
 ```
 
 ### Returns the list of expected arguments as a 1-indexed map of the following
@@ -101,7 +101,7 @@ ArgumentLexeme::ARG_TYPE_DOUBLE
 ArgumentLexeme::ARG_TYPE_STRING  
 ```
 
-### Returns:
+### Return Value
 
 - ***string[]***
 
@@ -132,7 +132,7 @@ LexItem constructor.
 ## Method: Lexeme->getLexItemType
 
 ```php
-function getLexItemType() : string
+function getLexItemType(): string
 ```
 
 The type of the printf Lexeme
@@ -142,7 +142,7 @@ The type of the printf Lexeme
 ## Method: Lexeme->getVal
 
 ```php
-function getVal() : string
+function getVal(): string
 ```
 
 The text of the lexeme
@@ -152,7 +152,7 @@ The text of the lexeme
 ## Method: Lexeme->getPos
 
 ```php
-function getPos() : int
+function getPos(): int
 ```
 
 The string position of the given lexeme
@@ -222,7 +222,20 @@ Available since PHP 5.0.3. */
 ## Method: ArgumentLexeme->__construct
 
 ```php
-function __construct(string $lexItemType, string $val, int $pos, ?int $arg, bool $showPositive, ?string $padChar, ?int $padWidth, bool $leftJustified, ?int $precision [, ?int $widthArgumentIndex = null [, ?int $precisionArgumentIndex = null [, bool $longModifier = false]]])
+function __construct(
+	string $lexItemType,
+	string $val,
+	int $pos,
+	?int $arg,
+	bool $showPositive,
+	?string $padChar,
+	?int $padWidth,
+	bool $leftJustified,
+	?int $precision,
+	?int $widthArgumentIndex = null,
+	?int $precisionArgumentIndex = null,
+	bool $longModifier = false,
+)
 ```
 
 ArgumentLexeme constructor.
@@ -234,12 +247,12 @@ LexItem constructor.
 ## Method: ArgumentLexeme->getArg
 
 ```php
-function getArg() : ?int
+function getArg(): ?int
 ```
 
 The position specifier, such as `%3$s` would return 3 and `%s` would return null
 
-### Returns:
+### Return Value
 
 - ***int*** | ***null*** - null on unspecified
 
@@ -248,7 +261,7 @@ The position specifier, such as `%3$s` would return 3 and `%s` would return null
 ## Method: ArgumentLexeme->getShowPositive
 
 ```php
-function getShowPositive() : bool
+function getShowPositive(): bool
 ```
 
 Is the "Prefix positive numbers with a plus sign +" flag enabled
@@ -258,12 +271,12 @@ Is the "Prefix positive numbers with a plus sign +" flag enabled
 ## Method: ArgumentLexeme->getPadChar
 
 ```php
-function getPadChar() : ?string
+function getPadChar(): ?string
 ```
 
 Specified pad character flag
 
-### Returns:
+### Return Value
 
 - ***string*** | ***null*** - null on unspecified
 
@@ -272,12 +285,12 @@ Specified pad character flag
 ## Method: ArgumentLexeme->getPadWidth
 
 ```php
-function getPadWidth() : ?int
+function getPadWidth(): ?int
 ```
 
 Specified pad width
 
-### Returns:
+### Return Value
 
 - ***int*** | ***null*** - null on unspecified
 
@@ -286,7 +299,7 @@ Specified pad width
 ## Method: ArgumentLexeme->getLeftJustified
 
 ```php
-function getLeftJustified() : bool
+function getLeftJustified(): bool
 ```
 
 Is left-justification flag enabled?
@@ -296,12 +309,12 @@ Is left-justification flag enabled?
 ## Method: ArgumentLexeme->getPrecision
 
 ```php
-function getPrecision() : ?int
+function getPrecision(): ?int
 ```
 
 The Lexeme's indicated precision.
 
-### Returns:
+### Return Value
 
 - ***int*** | ***null*** - null on unspecified
 
@@ -310,7 +323,7 @@ The Lexeme's indicated precision.
 ## Method: ArgumentLexeme->getWidthArgumentIndex
 
 ```php
-function getWidthArgumentIndex() : ?int
+function getWidthArgumentIndex(): ?int
 ```
 
 The argument index supplying a dynamic width, or null if width is static.  
@@ -318,7 +331,7 @@ The argument index supplying a dynamic width, or null if width is static.
 Returns ARG_INDEX_IMPLICIT (0) when the width argument is taken from the implicit argument list,  
 or an explicit 1-based index when written as `*N$`.
 
-### Returns:
+### Return Value
 
 - ***int*** | ***null*** - null when width is not dynamic
 
@@ -327,7 +340,7 @@ or an explicit 1-based index when written as `*N$`.
 ## Method: ArgumentLexeme->getPrecisionArgumentIndex
 
 ```php
-function getPrecisionArgumentIndex() : ?int
+function getPrecisionArgumentIndex(): ?int
 ```
 
 The argument index supplying a dynamic precision, or null if precision is static.  
@@ -335,7 +348,7 @@ The argument index supplying a dynamic precision, or null if precision is static
 Returns ARG_INDEX_IMPLICIT (0) when the precision argument is taken from the implicit argument list,  
 or an explicit 1-based index when written as `.*N$`.
 
-### Returns:
+### Return Value
 
 - ***int*** | ***null*** - null when precision is not dynamic
 
@@ -344,7 +357,7 @@ or an explicit 1-based index when written as `.*N$`.
 ## Method: ArgumentLexeme->getLongModifier
 
 ```php
-function getLongModifier() : bool
+function getLongModifier(): bool
 ```
 
 Is the `l` (long) length modifier present?  
@@ -356,7 +369,7 @@ PHP parses but ignores this modifier; it is preserved here for round-trip fideli
 ## Method: ArgumentLexeme->argType
 
 ```php
-function argType() : string
+function argType(): string
 ```
 
 Returns based on the type of argument one of the following  
@@ -371,7 +384,7 @@ ArgumentLexeme::ARG_TYPE_STRING
 ## Method: ArgumentLexeme->getLexItemType
 
 ```php
-function getLexItemType() : string
+function getLexItemType(): string
 ```
 
 The type of the printf Lexeme
@@ -381,7 +394,7 @@ The type of the printf Lexeme
 ## Method: ArgumentLexeme->getVal
 
 ```php
-function getVal() : string
+function getVal(): string
 ```
 
 The text of the lexeme
@@ -391,7 +404,7 @@ The text of the lexeme
 ## Method: ArgumentLexeme->getPos
 
 ```php
-function getPos() : int
+function getPos(): int
 ```
 
 The string position of the given lexeme

@@ -1,5 +1,6 @@
 <mddoc>
-	<docpage target="README.md" autoloader="psr4" autoloader-root="src" autoloader-root-namespace="donatj\Printf">
+	<autoloader type="composer"/>
+	<docpage target="README.md">
 		<section title="Printf Parser">
 			<badge-poser type="version"/>
 			<badge-poser type="downloads"/>
@@ -7,12 +8,10 @@
 
 			<badge-github-action name="donatj/printf-parser" workflow-file="ci.yml"/>
 
-			<badge-scrutinizer name="donatj/printf-parser" type="quality"/>
-			<badge-scrutinizer name="donatj/printf-parser" type="coverage"/>
 			<text><![CDATA[
-PHP printf-syntax compatible printf string parser.
+Parse, validate, and inspect PHP `printf` format strings before using them.
 
-Parses printf strings into a stream of lexemes.
+This library splits a format string into literal text and conversion lexemes. It identifies invalid conversions. It reports the type required for each argument. It can produce a canonical format string. Use it to validate user-configured messages, prepare arguments, or build tools that understand PHP's `printf` syntax.
 ]]></text>
 			<section title="Requirements">
 				<composer-requires/>
