@@ -7,7 +7,7 @@ fix: cbf
 test: cs phpunit phpstan
 
 .PHONY: ci
-ci: cs phpunit
+ci: cs phpunit php-cs-fixer
 
 .PHONY: cs
 cs:
@@ -24,3 +24,7 @@ phpunit:
 .PHONY: phpstan
 phpstan:
 	vendor/bin/phpstan
+
+.PHONY: php-cs-fixer
+php-cs-fixer:
+	vendor/bin/php-cs-fixer fix --dry-run --diff --sequential

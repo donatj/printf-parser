@@ -16,7 +16,7 @@ class ParserTest extends TestCase {
 	 * @param bool|string $valid true if the input is fully valid, false if invalid, or a string with the canonical form if the input is valid but not canonical
 	 * @dataProvider parseStringProvider
 	 */
-	public function testParsing( string $input, string $serialized, $valid ) : void {
+	public function testParsing( string $input, string $serialized, $valid ): void {
 		$lexemeEmitter = new LexemeEmitter;
 		$emitter = new class($lexemeEmitter) implements Emitter {
 
@@ -25,7 +25,7 @@ class ParserTest extends TestCase {
 			public function __construct( Emitter $emitter ) {
  $this->lexemeEmitter = $emitter; }
 
-			public function emit( Lexeme $lexItem ) : void {
+			public function emit( Lexeme $lexItem ): void {
 				$this->lexemeEmitter->emit($lexItem);
 				if( $lexItem instanceof ArgumentLexeme ) {
 					$s = "[{$lexItem->getLexItemType()}={$lexItem->getVal()}:{$lexItem->getPos()}||{$lexItem->getArg()}|pos:{$lexItem->getShowPositive()}|{$lexItem->getPadChar()}|{$lexItem->getPadWidth()}|left:{$lexItem->getLeftJustified()}|{$lexItem->getPrecision()}";
@@ -60,14 +60,14 @@ class ParserTest extends TestCase {
 				'Expected validity: %s, but got %s. Invalid lexeme: %s',
 				($valid === false) ? 'invalid' : 'valid',
 				($invalid === null) ? 'valid' : 'invalid',
-				($invalid !== null) ? sprintf("'%s' at position %d", $invalid->getVal(), $invalid->getPos()) : 'none'
+				($invalid !== null) ? sprintf("'%s' at position %d", $invalid->getVal(), $invalid->getPos()) : 'none',
 			));
 	}
 
 	/**
 	 * @return array<array{string,string,bool|string}> the string to test, its summarized parse, and true if already canonical/false if invalid/canonical string otherwise
 	 */
-	public static function parseStringProvider() : array {
+	public static function parseStringProvider(): array {
 		return [
 			[ '%% foo %%', '[!=%:1][!= foo :2][!=%:8]', true ],
 			[ '%11d%+22d%-33d', '[d=11d:1|||pos:||11|left:|][d=+22d:5|||pos:1||22|left:|][d=-33d:10|||pos:||33|left:1|]', true ],
@@ -260,7 +260,7 @@ class ParserTest extends TestCase {
 	 * @param bool                        $valid         false if the input is expected to produce invalid lexemes
 	 * @dataProvider printfWithTypeProvider
 	 */
-	public function testArgTypeLookup( string $input, array $expectedParts, array $args, bool $valid = true ) : void {
+	public function testArgTypeLookup( string $input, array $expectedParts, array $args, bool $valid = true ): void {
 		$emitter = new LexemeEmitter;
 		$parser  = new Parser($emitter);
 
@@ -291,7 +291,7 @@ class ParserTest extends TestCase {
 	/**
 	 * @return array<array{string,array<array{string}|string>,array<int,string>,bool}> the string to test, its expected lexeme parts, expected arg types, and true if valid/false if invalid
 	 */
-	public static function printfWithTypeProvider() : array {
+	public static function printfWithTypeProvider(): array {
 		return [
 			[ 'no args', [ 'no args' ], [], true ],
 			[
@@ -422,7 +422,7 @@ class ParserTest extends TestCase {
 	/**
 	 * @return \Generator<int|string,array<string,string>>
 	 */
-	public static function printProvider() : \Generator {
+	public static function printProvider(): \Generator {
 		foreach( self::parseStringProvider() as $input => $args ) {
 			if($args[2] === false) {
 				continue;
@@ -444,7 +444,7 @@ class ParserTest extends TestCase {
 	/**
 	 * @dataProvider printProvider
 	 */
-	public function testPrinter(string $input, string $expected) : void {
+	public function testPrinter(string $input, string $expected): void {
 		$emitter = new LexemeEmitter;
 		$parser  = new Parser($emitter);
 		$parser->parseStr($input);

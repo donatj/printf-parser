@@ -23,7 +23,7 @@ class Parser {
 	/**
 	 * Parses a printf string and emit parsed lexemes to the configured Emitter
 	 */
-	public function parseStr( string $string ) : void {
+	public function parseStr( string $string ): void {
 		$lexer = new StringLexer($string);
 
 		for(;;) {
@@ -35,7 +35,7 @@ class Parser {
 			if( $next->getString() === '%' ) {
 				if( $lexer->hasPrefix('%') ) {
 					$this->emitter->emit(
-						new Lexeme(Lexeme::T_LITERAL_STRING, '%', $lexer->pos())
+						new Lexeme(Lexeme::T_LITERAL_STRING, '%', $lexer->pos()),
 					);
 					$lexer->next();
 
@@ -52,7 +52,7 @@ class Parser {
 		}
 	}
 
-	private function lexString( Emitter $emitter, StringLexer $lexer ) : void {
+	private function lexString( Emitter $emitter, StringLexer $lexer ): void {
 		$pos    = $lexer->pos();
 		$buffer = '';
 		for(;;) {
@@ -70,11 +70,11 @@ class Parser {
 		}
 
 		$emitter->emit(
-			new Lexeme(Lexeme::T_LITERAL_STRING, $buffer, $pos)
+			new Lexeme(Lexeme::T_LITERAL_STRING, $buffer, $pos),
 		);
 	}
 
-	private function lexSprintf( Emitter $emitter, StringLexer $lexer ) : void {
+	private function lexSprintf( Emitter $emitter, StringLexer $lexer ): void {
 		$pos  = $lexer->pos();
 		$next = $lexer->next();
 
@@ -189,12 +189,12 @@ class Parser {
 				$precision,
 				$widthArgumentIndex,
 				$precisionArgumentIndex,
-				$longModifier
-			)
+				$longModifier,
+			),
 		);
 	}
 
-	private function eatInt( StringLexer $lexer ) : ?int {
+	private function eatInt( StringLexer $lexer ): ?int {
 		$int = '';
 		for(;;) {
 			$next = $lexer->next();
@@ -221,7 +221,7 @@ class Parser {
 	 * Peeks ahead to consume an integer followed immediately by '$'.
 	 * Only advances the lexer when the full N$ pattern is present; returns null otherwise.
 	 */
-	private function eatIntDollar( StringLexer $lexer ) : ?int {
+	private function eatIntDollar( StringLexer $lexer ): ?int {
 		$buf = '';
 		for( $size = 1;; $size++ ) {
 			$peeked = $lexer->peek($size);
