@@ -26,21 +26,21 @@ class Lexeme {
 	/**
 	 * The type of the printf Lexeme
 	 */
-	public function getLexItemType() : string {
+	public function getLexItemType(): string {
 		return $this->lexItemType;
 	}
 
 	/**
 	 * The text of the lexeme
 	 */
-	public function getVal() : string {
+	public function getVal(): string {
 		return $this->val;
 	}
 
 	/**
 	 * The string position of the given lexeme
 	 */
-	public function getPos() : int {
+	public function getPos(): int {
 		return $this->pos;
 	}
 

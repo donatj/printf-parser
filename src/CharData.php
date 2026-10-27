@@ -12,15 +12,15 @@ class CharData {
 		$this->eof    = $eof;
 	}
 
-	public function getString() : string {
+	public function getString(): string {
 		return $this->string;
 	}
 
-	public function isEof() : bool {
+	public function isEof(): bool {
 		return $this->eof;
 	}
 
-	public function length() : int {
+	public function length(): int {
 		return strlen($this->string);
 	}
 

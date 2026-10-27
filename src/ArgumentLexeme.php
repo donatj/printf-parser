@@ -128,14 +128,14 @@ class ArgumentLexeme extends Lexeme {
 	 * The position specifier, such as `%3$s` would return 3 and `%s` would return null
 	 * @return int|null null on unspecified
 	 */
-	public function getArg() : ?int {
+	public function getArg(): ?int {
 		return $this->arg;
 	}
 
 	/**
 	 * Is the "Prefix positive numbers with a plus sign +" flag enabled
 	 */
-	public function getShowPositive() : bool {
+	public function getShowPositive(): bool {
 		return $this->showPositive;
 	}
 
@@ -144,7 +144,7 @@ class ArgumentLexeme extends Lexeme {
 	 *
 	 * @return string|null null on unspecified
 	 */
-	public function getPadChar() : ?string {
+	public function getPadChar(): ?string {
 		return $this->padChar;
 	}
 
@@ -153,14 +153,14 @@ class ArgumentLexeme extends Lexeme {
 	 *
 	 * @return int|null null on unspecified
 	 */
-	public function getPadWidth() : ?int {
+	public function getPadWidth(): ?int {
 		return $this->padWidth;
 	}
 
 	/**
 	 * Is left-justification flag enabled?
 	 */
-	public function getLeftJustified() : bool {
+	public function getLeftJustified(): bool {
 		return $this->leftJustified;
 	}
 
@@ -169,7 +169,7 @@ class ArgumentLexeme extends Lexeme {
 	 *
 	 * @return int|null null on unspecified
 	 */
-	public function getPrecision() : ?int {
+	public function getPrecision(): ?int {
 		return $this->precision;
 	}
 
@@ -181,7 +181,7 @@ class ArgumentLexeme extends Lexeme {
 	 *
 	 * @return int|null null when width is not dynamic
 	 */
-	public function getWidthArgumentIndex() : ?int {
+	public function getWidthArgumentIndex(): ?int {
 		return $this->widthArgumentIndex;
 	}
 
@@ -193,7 +193,7 @@ class ArgumentLexeme extends Lexeme {
 	 *
 	 * @return int|null null when precision is not dynamic
 	 */
-	public function getPrecisionArgumentIndex() : ?int {
+	public function getPrecisionArgumentIndex(): ?int {
 		return $this->precisionArgumentIndex;
 	}
 
@@ -202,7 +202,7 @@ class ArgumentLexeme extends Lexeme {
 	 *
 	 * PHP parses but ignores this modifier; it is preserved here for round-trip fidelity.
 	 */
-	public function getLongModifier() : bool {
+	public function getLongModifier(): bool {
 		return $this->longModifier;
 	}
 
@@ -214,7 +214,7 @@ class ArgumentLexeme extends Lexeme {
 	 *   ArgumentLexeme::ARG_TYPE_DOUBLE
 	 *   ArgumentLexeme::ARG_TYPE_STRING
 	 */
-	public function argType() : string {
+	public function argType(): string {
 		if( in_array($this->lexItemType, self::INTEGER_TYPES, true) ) {
 			return self::ARG_TYPE_INT;
 		}

@@ -27,7 +27,7 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	 *
 	 * This is useful for checking if a printf string parsed without error.
 	 */
-	public function getInvalid() : ?Lexeme {
+	public function getInvalid(): ?Lexeme {
 		foreach( $this->lexItems as $lexItem ) {
 			if( $lexItem->getLexItemType() === Lexeme::T_INVALID ) {
 				return $lexItem;
@@ -40,7 +40,7 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	/**
 	 * @internal
 	 */
-	public function offsetSet( $offset, $value ) : void {
+	public function offsetSet( $offset, $value ): void {
 		if( $offset === null ) {
 			$this->lexItems[] = $value;
 		} else {
@@ -51,21 +51,21 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	/**
 	 * @internal
 	 */
-	public function offsetExists( $offset ) : bool {
+	public function offsetExists( $offset ): bool {
 		return isset($this->lexItems[$offset]);
 	}
 
 	/**
 	 * @internal
 	 */
-	public function offsetUnset( $offset ) : void {
+	public function offsetUnset( $offset ): void {
 		unset($this->lexItems[$offset]);
 	}
 
 	/**
 	 * @internal
 	 */
-	public function offsetGet( $offset ) : ?Lexeme {
+	public function offsetGet( $offset ): ?Lexeme {
 		return $this->lexItems[$offset] ?? null;
 	}
 
@@ -73,7 +73,7 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	 * @return \ArrayIterator<int,\donatj\Printf\Lexeme>
 	 * @internal
 	 */
-	public function getIterator() : \ArrayIterator {
+	public function getIterator(): \ArrayIterator {
 		return new \ArrayIterator($this->lexItems);
 	}
 
@@ -82,7 +82,7 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	 *
 	 * @return Lexeme[]
 	 */
-	public function toArray() : array {
+	public function toArray(): array {
 		return $this->lexItems;
 	}
 
@@ -98,7 +98,7 @@ class LexemeCollection implements \ArrayAccess, \IteratorAggregate {
 	 *
 	 * @return string[]
 	 */
-	public function argTypes() : array {
+	public function argTypes(): array {
 		$noNumInc = 1;
 		$args     = [];
 		foreach( $this->lexItems as $item ) {

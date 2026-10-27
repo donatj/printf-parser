@@ -15,17 +15,17 @@ class StringLexer {
 		$this->string = $string;
 	}
 
-	public function peek( int $size = 1 ) : CharData {
+	public function peek( int $size = 1 ): CharData {
 		$str = substr($this->string, $this->pos, $size);
 
 		return new CharData($str, strlen($str) < $size);
 	}
 
-	public function pos() : int {
+	public function pos(): int {
 		return $this->pos;
 	}
 
-	public function next() : CharData {
+	public function next(): CharData {
 		$data = $this->peek();
 
 		$this->pos += $data->length();
@@ -33,21 +33,21 @@ class StringLexer {
 		return $data;
 	}
 
-	public function rewind() : void {
+	public function rewind(): void {
 		$this->pos--;
 		if( $this->pos < 0 ) {
-			//@todo custom exception
+			// @todo custom exception
 			throw new \RuntimeException('cannot rewind');
 		}
 	}
 
-	public function hasPrefix( string $prefix ) : bool {
+	public function hasPrefix( string $prefix ): bool {
 		$peek = $this->peek(strlen($prefix));
 
 		return $peek->getString() === $prefix;
 	}
 
-	public function substr( int $start, int $length ) : string {
+	public function substr( int $start, int $length ): string {
 		return substr($this->string, $start, $length);
 	}
 
