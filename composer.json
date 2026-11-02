@@ -10,7 +10,7 @@
 		"squizlabs/php_codesniffer": "^3.13",
 		"friendsofphp/php-cs-fixer": "^3.95",
 		"phpstan/phpstan": "=2.3.4",
-		"donatj/mddoc": "=0.13.0"
+		"donatj/mddoc": "=0.14.1"
 	},
 	"license": "MIT",
 	"authors": [
